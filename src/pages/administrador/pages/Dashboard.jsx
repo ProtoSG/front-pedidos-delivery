@@ -10,6 +10,26 @@ const createColumns = (keys) => keys.map(key => ({
   sortable: true
 }));
 
+const newData = [];
+
+data.map((item) => {
+  const { id, name, price, category, descriptio } = item;
+  newData.push({
+    id: id,
+    name: name,
+    price: price,
+    category: category,
+    descriptio: descriptio,
+    actions: (
+      <div className='flex gap-4'>
+        <button className='bg-primary-500 text-white rounded-2xl py-2 px-4'>Editar</button>
+        <button className='bg-red-500 text-white rounded-2xl py-2 px-4'>Eliminar</button>
+      </div>
+    )
+  });
+});
+console.log(newData);
+
 // Configuración común para las DataTables
 const dataTableConfig = {
   pagination: true,
@@ -19,9 +39,9 @@ const dataTableConfig = {
 };
 
 export default function Dashboard() {
-  const columns = createColumns(['ID', 'Name', 'Price', 'Category', 'Descriptio']);
-  const columns_2 = createColumns(['ID', 'Name']);
-  const columns_3 = createColumns(['ID', 'Name', 'Price']);
+  const columns = createColumns(['ID', 'Name', 'Price', 'Category', 'Descriptio', 'Actions']);
+  const columns_2 = createColumns(['ID', 'Name', 'Actions']);
+  const columns_3 = createColumns(['ID', 'Name', 'Price', 'Actions']);
 
   return (
     <main className='flex flex-col w-full px-10'>
@@ -37,7 +57,7 @@ export default function Dashboard() {
           <DataTable
             title='Productos'
             columns={columns} 
-            data={data} 
+            data={newData} 
             {...dataTableConfig}
           />
         </div>
@@ -45,7 +65,7 @@ export default function Dashboard() {
           <DataTable
             title='Categorías'
             columns={columns_2} 
-            data={data} 
+            data={newData} 
             {...dataTableConfig}
           />
         </div>
@@ -53,7 +73,7 @@ export default function Dashboard() {
           <DataTable
             title='Extras'
             columns={columns_3} 
-            data={data} 
+            data={newData} 
             {...dataTableConfig}
           />
         </div>

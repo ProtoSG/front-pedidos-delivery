@@ -1,5 +1,14 @@
 import { useState } from "react";
 
+function ItemImput({name}){
+    return(
+        <>
+            <span className="px-2 pb-2">{name}:</span>
+            <input type="text" placeholder={name} className="border-2 rounded-3xl px-2 py-2 focus:outline-none" />
+        </>
+    )
+}
+
 export default function AddProduct() {
     const [active, setActive] = useState('Productos');
     
@@ -22,6 +31,25 @@ export default function AddProduct() {
         }
     ]
 
+    const categorias = [
+        {
+          id: 1,
+          name: 'ENTRADA',
+        },
+        {
+          id: 2,
+          name: 'PERU',
+        },
+        {
+          id: 3,
+          name: 'KIDS'
+        },
+        {
+          id: 4,
+          name: 'AUTOR'
+        }
+      ]
+
     return (
         <main className='flex flex-col w-full px-10'>
             <h1 className="text-3xl font-bold my-8">Agregar Producto</h1>
@@ -41,34 +69,38 @@ export default function AddProduct() {
                             <form className="flex flex-col gap-4">
                                 <div className="grid grid-cols-3 gap-8">
                                     <label className="col-span-1 flex flex-col">
-                                        <span>Nombre:</span>
-                                        <input type="text" placeholder="Nombre" className="border-b-2 border-primary-500 focus:outline-none" />
+                                        <ItemImput name="Nombre"/>
                                     </label>
                                     <label className="col-span-1 flex flex-col">
-                                        <span>Precio:</span>
-                                        <input type="text" placeholder="Precio" className="border-b-2 border-primary-500 focus:outline-none" />
+                                        <ItemImput name="Precio"/>    
                                     </label>
                                     <label className="col-span-1 flex flex-col">
-                                        <span>Categoría:</span>
-                                        <input type="text" placeholder="Categoría" className="border-b-2 border-primary-500 focus:outline-none" />
+                                        <span className="px-2 pb-2">Categoria:</span>
+                                        <select type="text" placeholder="Categoria" className="border-2 rounded-3xl px-2 py-2 focus:outline-none">
+                                            {
+                                                categorias.map((item) => (
+                                                    <option key={item.id} value={item.name}>{item.name}</option>
+                                                ))
+                                            }
+                                        </select>
                                     </label>
                                 </div>
                                 <label className="flex flex-col">
-                                    <span>Descripción:</span>
-                                    <input type="text" placeholder="Descripción" className="border-b-2 border-primary-500 focus:outline-none" />
+                                    <ItemImput name="Descripcion"/>    
                                 </label>
                                 <label className="flex flex-col">
-                                    <span>Imagen:</span>
-                                    <input type="text" placeholder="Imagen" className="border-b-2 border-primary-500 focus:outline-none" />
+                                    <ItemImput name="Imagen"/>    
                                 </label>
-                                <button className="bg-primary-500 text-white rounded-2xl py-2">Agregar</button>
+                                <button className=" bg-primary-500 text-white rounded-2xl py-2">Agregar</button>
                             </form>
                         )
                     }
                     {
                         active === 'Categorias' && (
                             <form className="flex flex-col gap-4">
-                                <input type="text" placeholder="Nombre" className="border-b-2 border-primary-500 focus:outline-none" />
+                                <label className="flex flex-col">
+                                    <ItemImput name="Nombre"/>
+                                </label>    
                                 <button className="bg-primary-500 text-white rounded-2xl py-2">Agregar</button>
                             </form>
                         )
@@ -76,8 +108,15 @@ export default function AddProduct() {
                     {
                         active === 'Extras' && (
                             <form className="flex flex-col gap-4">
-                                <input type="text" placeholder="Nombre" className="border-b-2 border-primary-500 focus:outline-none" />
-                                <input type="text" placeholder="Precio" className="border-b-2 border-primary-500 focus:outline-none" />
+                                <label className="flex flex-col">
+                                    <ItemImput name="Nombre"/>
+                                </label>    
+                                <label className="flex flex-col">
+                                    <ItemImput name="Precio"/>
+                                </label>    
+                                <label className="flex flex-col">
+                                    <ItemImput name="Imagen"/>
+                                </label>    
                                 <button className="bg-primary-500 text-white rounded-2xl py-2">Agregar</button>
                             </form>
                         )

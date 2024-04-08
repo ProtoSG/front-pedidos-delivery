@@ -27,7 +27,7 @@ function ItemHeader({name, link, icon}) {
 }
 export default function Header() {
   return (
-    <header className="border-r-2 border-primary-800 h-full w-24 lg:w-auto">
+    <header className="fixed h-[90dvh] border-r-2 border-primary-800 w-24 lg:w-auto">
         <div className='mb-10 lg:px-14'>
             <Logo className="fill-primary-400 w-12 lg:w-28 mx-auto  hidden lg:block" />
             <div className='lg:hidden flex justify-center'>
