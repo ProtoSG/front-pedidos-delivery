@@ -1,11 +1,11 @@
-import plato_image from '../../assets/plato.jpg';
+import plato_image from '../assets/plato.jpg';
 
 export const data = [
     {
       id: 1,
       name: 'asd',
       price: 25.00,
-      category: 1,
+      category: 5,
       descriptio : 'Plato bandera del Peru',
       image: plato_image
     },
@@ -13,7 +13,7 @@ export const data = [
       id: 2,
       name: 'Lomo Saltado',
       price: 30.00,
-      category: 2,
+      category: 5,
       descriptio : 'Plato bandera del Peru',
       image: plato_image
     },
@@ -21,7 +21,7 @@ export const data = [
       id: 3,
       name: 'Pollo a la brasa',
       price: 20.00,
-      category: 3,
+      category: 5,
       descriptio : 'Plato bandera del Peru',
       image: plato_image
     },
@@ -29,7 +29,7 @@ export const data = [
       id: 4,
       name: 'Arroz con mariscos',
       price: 35.00,
-      category: 4,
+      category: 5,
       descriptio : 'Plato bandera del Peru',
       image: plato_image
     },
@@ -37,7 +37,7 @@ export const data = [
       id: 5,
       name: 'Ceviche',
       price: 25.00,
-      category: 1,
+      category: 6,
       descriptio : 'Plato bandera del Peru',
       image: plato_image
     },
@@ -45,7 +45,7 @@ export const data = [
       id: 6,
       name: 'Lomo Saltado',
       price: 30.00,
-      category: 2,
+      category: 6,
       descriptio : 'Plato bandera del Peru',
       image: plato_image
     },

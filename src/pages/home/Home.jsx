@@ -3,22 +3,22 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 
 export default function Home() {
-  const {productos, setProductos, total, setTotal} = usePedido();
+  const { pedido, setPedido, total, setTotal } = usePedido();
 
   return (
     <>
       <Header
-        productos={productos}
-        setProductos={setProductos}
+        pedido={pedido}
+        setPedido={setPedido}
         total={total}
         setTotal={setTotal}
       />
       <Main
-        productos={productos}
-        setProductos={setProductos}
+        pedido={pedido}
+        setPedido={setPedido}
         total={total}
         setTotal={setTotal}
       />
     </>
-  )
+  );
 }

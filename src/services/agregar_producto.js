@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 
-const actualizarLocalStorage = (productos, total) => {
-    localStorage.setItem('productos', JSON.stringify(productos));
+export const actualizarLocalStorage = (pedido, total) => {
+    localStorage.setItem('pedido', JSON.stringify(pedido));
     localStorage.setItem('total', JSON.stringify(total));
-    }
+}
 
-export const addProduct = ({producto, setProductos, setTotal, total, productos}) => {
-    const existe = productos.find((p) => p.id === producto.id);
-    let newProductos = [];
+export const addProduct = ({producto, setPedido, setTotal, total, pedido}) => {
+    const existe = pedido.find((p) => p.id === producto.id);
+    let newPedido = [];
     if (existe) {
-        newProductos = productos.map((p) => {
+        newPedido = pedido.map((p) => {
         if (p.id === producto.id) {
             return {
             ...p,
@@ -19,22 +19,74 @@ export const addProduct = ({producto, setProductos, setTotal, total, productos})
         }
         return p;
         });
-        setProductos(newProductos);
-        setTotal(total + producto.price);
+        setPedido(newPedido);
+        setTotal(total + producto?.precio);
+
+        actualizarLocalStorage(newPedido, total + producto?.precio);
     } else {
         const newProduct = {
         id: producto.id,
-        name: producto.name,
-        price: producto.price,
-        category: producto.category,
-        descriptio: producto.descriptio,  
+        name: producto.nombre,
+        price: producto.precio,
+        category: producto.categoria,
+        descriptio: producto.descripcion,  
         quantity: 1,
-        subtotal: producto.price,
+        subtotal: producto.precio,
         };
-        newProductos = [...productos, newProduct];
-        setProductos(newProductos);
-        setTotal(total + producto.price);
+        newPedido = [...pedido, newProduct];
+        setPedido(newPedido);
+        setTotal(total + producto?.precio);
 
-        actualizarLocalStorage(newProductos, total + producto.price);
+        actualizarLocalStorage(newPedido, total + producto.precio);
     }
-    }
+}
+
+export const addCantidad = ({producto, setPedido, setTotal, total, pedido }) => {
+    const newPedido = pedido.map((p) => {
+      if (p.id === producto.id) {
+        return {
+          ...p,
+          quantity: p.quantity + 1,
+          subtotal: (p.quantity + 1) * p.price,
+        };
+      }
+      return p;
+    });
+    setPedido(newPedido);
+    setTotal(total + producto.price);
+
+    actualizarLocalStorage(newPedido, total + producto.price);
+};
+
+export const removeCantidad = ({producto, setPedido, setTotal, total, pedido}) => {
+    const newPedido = pedido.map((p) => {
+        if (p.id === producto.id) {
+        return {
+            ...p,
+            quantity: p.quantity - 1,
+            subtotal: (p.quantity - 1) * p.price,
+        };
+        }
+        return p;
+    });
+    setPedido(newPedido);
+    setTotal(total - producto.price);
+
+    actualizarLocalStorage(newPedido, total - producto.price);
+    
+}
+
+
+export const removeProduct = ({producto, setPedido, setTotal, total, pedido}) => {
+    const newPedido = pedido.filter((p) => p.id !== producto.id);
+    const newTotal = total - producto.price * producto.quantity;
+    setPedido(newPedido);
+    setTotal(newTotal);
+    actualizarLocalStorage(newPedido, newTotal);
+}
+
+export const deletePedido = ({setPedido, setTotal}) => {
+    setPedido([]);
+    setTotal(0);
+    actualizarLocalStorage([], 0);
+}

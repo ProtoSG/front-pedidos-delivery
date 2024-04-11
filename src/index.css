@@ -8,10 +8,11 @@ body{
     background-color: #f3f4f6;
     margin: 0;
     max-height: 100vh;
-    scrollbar-width: auto;
 }
 
-*::-webkit-scrollbar{
+
+*::-webkit-scrollbar
+{
     width: 8px;
 }
 
