@@ -15,7 +15,7 @@ export default function ListProducts({
   const { productos, loadingProductos, errorProductos } = useProductos();
 
   const filterData =
-    productos?.filter((producto) => producto.categoria.id === active) ?? [];
+    productos.filter((producto) => producto.categoria.id === active) ?? [];
   const limitData = [];
 
   for (let i = 0; i < filterData.length; i += 3) {

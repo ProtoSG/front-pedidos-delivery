@@ -28,7 +28,7 @@ export default function Header({ pedido, setPedido, total, setTotal }) {
         >
           <IconShoppingBag className="size-14 text-white" />
           <span className="text-white absolute -right-2 -bottom-1 bg-black size-8 text-lg rounded-full flex justify-center items-center">
-            {pedido.length}
+            {pedido[0]?.length}
           </span>
         </span>
       </header>

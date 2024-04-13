@@ -1,7 +1,24 @@
 import { useEffect, useState } from "react";
 
+
+// pedido = [
+//   productos = [
+//       {
+//         ...
+//       },
+//       {
+//         ...
+//       }
+//   ],
+//   extras = [
+//     {
+//       ...
+//     }
+//   ]
+// ]
+
 export default function usePedido() {
-  const [pedido, setPedido] = useState([]);
+  const [pedido, setPedido] = useState([[], []]);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -14,7 +31,7 @@ export default function usePedido() {
       setTotal(JSON.parse(localTotal));
     }
   }, []);
-
+  console.log(pedido)
   return {
     pedido,
     total,
