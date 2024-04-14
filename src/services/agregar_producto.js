@@ -137,8 +137,8 @@ export const removeProduct = ({producto, extra, setPedido, setTotal, total, pedi
 }
 
 export const deletePedido = ({setPedido, setTotal}) => {
-    setPedido([]);
+    setPedido([[], []]);
     setTotal(0);
-    actualizarLocalStorage([], 0);
+    actualizarLocalStorage([[], []], 0);
 }
 

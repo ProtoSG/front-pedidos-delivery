@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
-import { IconChartInfographic, IconLayoutDashboard } from "@tabler/icons-react";
-import { Link, useLocation } from "react-router-dom";
+import {
+  IconChartInfographic,
+  IconLayoutDashboard,
+  IconLogout2,
+} from "@tabler/icons-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import pez from "../../../assets/pez1.png";
 import Logo from "../../../components/icons/Logo";
+import { logout } from "../../../services/login_service";
 
 function SpanItem({ icon, isSelected }) {
   return (
@@ -18,11 +23,11 @@ function SpanItem({ icon, isSelected }) {
 
 function ItemHeader({ name, link, icon }) {
   const location = useLocation();
-  const isSelected = location.pathname === `/admin${link}`;
+  const isSelected = location.pathname === `${link}`;
   return (
     <li className="text-xl pb-6">
       <Link
-        to={`/admin${link}`}
+        to={`${link}`}
         className={`flex justify-center lg:pl-8 lg:justify-normal py-2 items-center hover:bg-primary-100 group ${
           isSelected && "bg-primary-100 border-r-4 border-primary-600"
         }`}
@@ -34,6 +39,13 @@ function ItemHeader({ name, link, icon }) {
   );
 }
 export default function Header() {
+  const navigate = useNavigate();
+
+  const handleSalir = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <header className="fixed z-10 bg-[#f3f4f6] h-[90dvh] border-r-2 border-primary-800 w-24 lg:w-auto">
       <div className="mb-10 lg:px-14">
@@ -45,14 +57,25 @@ export default function Header() {
       </div>
       <nav>
         <ul>
-          <ItemHeader name="Dashboard" link="" icon={<IconLayoutDashboard />} />
+          <ItemHeader
+            name="Dashboard"
+            link="/admin"
+            icon={<IconLayoutDashboard />}
+          />
           <ItemHeader
             name="Reporte"
-            link="/report"
+            link="/admin/report"
             icon={<IconChartInfographic />}
           />
         </ul>
       </nav>
+      <button
+        onClick={handleSalir}
+        className="text-xl w-full flex justify-center lg:pl-8 lg:justify-normal py-2 items-center hover:bg-primary-100 group"
+      >
+        <SpanItem icon={<IconLogout2 />} />
+        <span className="hidden lg:block ml-4">Salir</span>
+      </button>
     </header>
   );
 }

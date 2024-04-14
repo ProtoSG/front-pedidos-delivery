@@ -1,6 +1,8 @@
-import { api } from '../constants/api'
+import { api } from '../constants/api';
 
 const productoApi = `${api}/producto`
+const token = localStorage.getItem('token');
+
 
 const postProducto = async ({nombre, precio, categoria_id, descripcion, imagen_url}) => {
     const data = {
@@ -15,6 +17,7 @@ const postProducto = async ({nombre, precio, categoria_id, descripcion, imagen_u
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
             },
             body: JSON.stringify(data),
         })
@@ -47,6 +50,9 @@ const deleteProducto = async (id) => {
     try {
         const response = await fetch(`${productoApi}/${id}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization' : `Bearer ${token}`
+            },
         })
         if(!response.ok){
             throw new Error("Hubo un problema al enviar la  solicitud " + response.status )
@@ -71,6 +77,7 @@ const updateProducto = async (id, nombre, precio, categoria_id, descripcion, ima
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
             },
             body: JSON.stringify(data),
         })
@@ -86,5 +93,5 @@ const updateProducto = async (id, nombre, precio, categoria_id, descripcion, ima
     }
 }
 
-export { deleteProducto, getProductos, postProducto, updateProducto }
+export { deleteProducto, getProductos, postProducto, updateProducto };
 

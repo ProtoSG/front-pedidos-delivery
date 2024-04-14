@@ -2,12 +2,15 @@ import { api } from '../constants/api';
 
 const categoriApi = `${api}/categoria`;
 
+const token = localStorage.getItem('token');
+
 const postCategoria = async ({nombre}) => {
     try {
         const response = await fetch(`${categoriApi}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
             },
             body: JSON.stringify({nombre}),
         })
@@ -40,6 +43,9 @@ const deleteCategoria = async (id) => {
     try {
         const response = await fetch(`${categoriApi}/${id}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization' : `Bearer ${token}`
+            },
         })
         if(!response.ok){
             throw new Error("Hubo un problema al enviar la  solicitud " + response.status )
@@ -58,6 +64,7 @@ const updateCategoria = async (id, nombre) => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
             },
             body: JSON.stringify({nombre}),
         })

@@ -1,6 +1,8 @@
 import { api } from '../constants/api';
 
 const extrasApi = `${api}/extra`;
+const token = localStorage.getItem('token');
+
 
 const postExtra = async ({nombre, precio, imagen_url}) => {
     const data = {
@@ -13,6 +15,7 @@ const postExtra = async ({nombre, precio, imagen_url}) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
             },
             body: JSON.stringify(data),
         })
@@ -45,6 +48,9 @@ const deleteExtra = async (id) => {
     try {
         const response = await fetch(`${extrasApi}/${id}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization' : `Bearer ${token}`
+            },
         })
         if(!response.ok){
             throw new Error("Hubo un problema al enviar la  solicitud " + response.status )
@@ -67,6 +73,7 @@ const updateExtra = async (id, nombre, precio, imagen_url) => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
             },
             body: JSON.stringify(data),
         })
