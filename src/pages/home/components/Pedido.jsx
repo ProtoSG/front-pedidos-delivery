@@ -8,6 +8,7 @@ import {
 } from "../../../services/agregar_producto";
 
 import { IconMinus, IconPlus, IconTrash, IconX } from "@tabler/icons-react";
+import { postPedido } from "../../../services/pedido_service";
 import Extra from "./Extra";
 
 export default function Pedido({ pedido, setPedido, total, setTotal }) {
@@ -39,7 +40,8 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
     modal2.showModal();
   };
 
-  const handleWhatsAppMessage = (pedido, total) => {
+  const handleWhatsAppMessage = async (pedido, total) => {
+    await postPedido({ total });
     const phoneNumber = "929720211";
     const message = `*Su pedido es*:${pedido[0]
       .map(
@@ -57,6 +59,9 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
       message
     )}`;
     window.open(url, "_blank");
+
+    deleteP();
+    handleClose();
   };
 
   return (
