@@ -61,7 +61,7 @@ export default function Venta({ activeInterval }) {
   return (
     <article className="col-span-1 lg:col-span-2 row-span-1 border-2 grid grid-rows-7 grid-cols-1 border-gray-400 rounded-2xl px-6 py-4">
       <header className="row-span-2 ">
-        <h2 className="text-lg font-semibold mb-3 ">Venta {nombre}</h2>
+        <h2 className="text-lg font-semibold mb-3">Venta {nombre}</h2>
         <span className="text-4xl font-bold text-primary-700">
           S/ {total?.toFixed(2)}
         </span>

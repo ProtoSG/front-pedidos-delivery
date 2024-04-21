@@ -2,6 +2,7 @@
 import { ArcElement, Chart, Legend, Tooltip } from "chart.js";
 import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
+import useRankExtra from "../hooks/useRankExtra";
 
 Chart.register(ArcElement, Tooltip, Legend);
 Chart.defaults.plugins.legend.position = "bottom";
@@ -10,28 +11,24 @@ Chart.defaults.plugins.legend.labels.boxHeight = 20;
 
 export default function RankingExtras({ activeInterval }) {
   const [extras, setExtras] = useState(null);
-
+  
+  const {extras: extrasDias} = useRankExtra({date: 'dia'})
+  const {extras: extrasSemanas} = useRankExtra({date: 'semana'})
+  const {extras: extrasMeses} = useRankExtra({date: 'mes'})
+  const {extras: extrasAnos} = useRankExtra({date: 'año'})
+  console.log(extrasDias)
   useEffect(() => {
-    const extraDayData = [
-      { nombre: "extra 1", cantidad: 30 },
-      { nombre: "extra 2", cantidad: 20 },
-      { nombre: "extra 3", cantidad: 10 },
-    ];
-
-    const extraWeekData = [
-      { nombre: "extra 1", cantidad: 90 },
-      { nombre: "extra 2", cantidad: 50 },
-      { nombre: "extra 3", cantidad: 20 },
-    ];
 
     const extrasData = new Map([
-      ["1D", extraDayData],
-      ["1S", extraWeekData],
+      ["1D", extrasDias],
+      ["1S", extrasSemanas],
+      ["1M", extrasMeses],
+      ["1A", extrasAnos],
     ]);
 
     const newExtrasData = extrasData.get(activeInterval);
     setExtras(newExtrasData);
-  }, [activeInterval]);
+  }, [activeInterval, extrasDias, extrasSemanas, extrasMeses, extrasAnos]);
 
   const labels = extras ? extras.map((item) => item.nombre) : [];
   const values = extras ? extras.map((item) => item.cantidad) : [];

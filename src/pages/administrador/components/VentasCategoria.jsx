@@ -9,37 +9,30 @@ import {
 } from "chart.js";
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
+import useRankCategoria from "../hooks/useRankCategoria";
 
 Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 export default function VentasCategoria({ activeInterval }) {
   const [categorias, setCategorias] = useState(null);
 
+  const {categorias: categoriasDia} = useRankCategoria({date: 'dia'})
+  const {categorias: categoriasSemana} = useRankCategoria({date: 'semana'})
+  const {categorias: categoriasMes} = useRankCategoria({date: 'mes'})
+  const {categorias: categoriasAno} = useRankCategoria({date: 'año'})
+  
   useEffect(() => {
-    const categoriaDayData = [
-      { nombre: "Categoria 1", total: 900 },
-      { nombre: "Categoria 2", total: 400 },
-      { nombre: "Categoria 3", total: 700 },
-      { nombre: "Categoria 4", total: 100 },
-      { nombre: "Categoria 5", total: 300 },
-    ];
-
-    const categoriaWeekData = [
-      { nombre: "Categoria 1", total: 2000 },
-      { nombre: "Categoria 2", total: 1200 },
-      { nombre: "Categoria 3", total: 100 },
-      { nombre: "Categoria 4", total: 1600 },
-      { nombre: "Categoria 5", total: 300 },
-    ];
 
     const categoriasData = new Map([
-      ["1D", categoriaDayData],
-      ["1S", categoriaWeekData],
+      ["1D", categoriasDia],
+      ["1S", categoriasSemana],
+      ["1M", categoriasMes],
+      ["1A", categoriasAno],
     ]);
 
     const newCategoriasData = categoriasData.get(activeInterval);
     setCategorias(newCategoriasData);
-  }, [activeInterval]);
+  }, [activeInterval, categoriasDia, categoriasSemana, categoriasMes, categoriasAno]);
 
   const labels = categorias ? categorias.map((item) => item.nombre) : [];
   const values = categorias ? categorias.map((item) => item.total) : [];

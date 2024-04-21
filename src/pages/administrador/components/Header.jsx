@@ -4,6 +4,7 @@ import {
   IconLayoutDashboard,
   IconLogout2,
 } from "@tabler/icons-react";
+import { IconHome } from '@tabler/icons-react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import pez from "../../../assets/pez1.png";
 import Logo from "../../../components/icons/Logo";
@@ -66,6 +67,11 @@ export default function Header() {
             name="Reporte"
             link="/admin/report"
             icon={<IconChartInfographic />}
+          />
+          <ItemHeader
+            name="Home"
+            link="/"
+            icon={<IconHome />}
           />
         </ul>
       </nav>

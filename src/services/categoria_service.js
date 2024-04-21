@@ -59,7 +59,6 @@ const deleteCategoria = async (id) => {
 }
 
 const updateCategoria = async (id, nombre) => {
-    console.log({id}, {nombre})
     try {
         const response = await fetch(`${categoriApi}/${id}`, {
             method: 'PUT',
@@ -75,10 +74,29 @@ const updateCategoria = async (id, nombre) => {
         const res = await response.json();
         console.log('Respuesta del servidor:', res);
     } catch (error) {
-        console.log(error)
+        console.error(error)
+    }
+}
+
+const getRankCategoria = async({date}) => {
+    try {
+        const response = await fetch(`${categoriApi}/rank/${date}`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        if(!response.ok){
+            throw new Error("Hubo un problema al enviar la  solicitud " + response.status )
+        }
+        const data = await response.json()
+        return data
+    } catch (e) {
+        console.error(error)
+        
     }
 }
 
 
-export { deleteCategoria, getCategorias, postCategoria, updateCategoria };
+export { deleteCategoria, getCategorias, postCategoria, updateCategoria, getRankCategoria };
 
