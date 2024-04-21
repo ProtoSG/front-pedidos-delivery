@@ -6,7 +6,7 @@ import ButtonPri from "../../administrador/components/ButtonPri";
 
 export default function Extra({ pedido, setPedido, total, setTotal }) {
   const { extras, loadingExtras, errorExtras } = useExtras();
-
+  console.log(extras, loadingExtras, errorExtras);
   const closeModal = () => {
     const modal2 = document.getElementById("modal-2");
     modal2.close();

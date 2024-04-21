@@ -41,7 +41,9 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
   };
 
   const handleWhatsAppMessage = async (pedido, total) => {
-    await postPedido({ total });
+    const productos = pedido[0];
+    const extras = pedido[1];
+    await postPedido({ total, productos, extras });
     const phoneNumber = "929720211";
     const message = `*Su pedido es*:${pedido[0]
       .map(
@@ -54,7 +56,7 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
       - ${extra.cantidad} ${extra.nombre}`
       )
       .join("")}\n\n *Total: S/ ${total.toFixed(2)}*
-    `; // Ingresa el mensaje predeterminado
+    `;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;

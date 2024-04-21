@@ -15,10 +15,12 @@ export default function Table({ title, columns, data }) {
     paginationPerPage: 5,
     responsive: true,
     customStyles: customStyles,
+    fixedHeader: true,
+    fixedHeaderScrollHeight: "70%",
   };
 
   return (
-    <div className="flex flex-col justify-center text-lg">
+    <div className="w-full h-full text-lg p-3 rounded-3xl border-2 border-gray-400 bg-[#FFFFFF]">
       <DataTable
         title={title}
         columns={columns}

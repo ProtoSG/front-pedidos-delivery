@@ -55,7 +55,7 @@ export default function Dashboard() {
   const newExtras = addActionsButtons(extras, "extras");
 
   return (
-    <main className="flex flex-col w-full px-10">
+    <main className="flex flex-col w-full h-full px-10">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold my-8">Dashboard</h1>
         <Link
@@ -66,8 +66,8 @@ export default function Dashboard() {
           Argegar
         </Link>
       </div>
-      <section className="flex flex-col lg:grid grid-cols-5 grid-rows-2 gap-8">
-        <div className="row-span-1 col-span-5">
+      <section className="flex flex-col h-[90%]  lg:grid  grid-cols-5 grid-rows-2 gap-8">
+        <div className="row-span-1 col-span-5 ">
           <Table
             title="Productos"
             data={newProductos}
@@ -76,7 +76,7 @@ export default function Dashboard() {
             error={errorProductos}
           />
         </div>
-        <div className="col-span-2">
+        <div className="col-span-2 row-span-1 ">
           <Table
             title="Categorias"
             data={newCategorias}
@@ -85,7 +85,7 @@ export default function Dashboard() {
             error={error}
           />
         </div>
-        <div className="col-span-3">
+        <div className="col-span-3 row-span-1 ">
           <Table
             title="Extras"
             data={newExtras}

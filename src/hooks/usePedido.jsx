@@ -1,22 +1,5 @@
 import { useEffect, useState } from "react";
 
-
-// pedido = [
-//   productos = [
-//       {
-//         ...
-//       },
-//       {
-//         ...
-//       }
-//   ],
-//   extras = [
-//     {
-//       ...
-//     }
-//   ]
-// ]
-
 export default function usePedido() {
   const [pedido, setPedido] = useState([[], []]);
   const [total, setTotal] = useState(0);

@@ -10,7 +10,7 @@ export default function useAdmin() {
     if (userLocal) {
       const user = JSON.parse(userLocal);
       if (user.token) {
-        setUser(user);
+        setUser(user);  
       } else {
         localStorage.removeItem("user");
         setUser(null);

@@ -22,7 +22,8 @@ const postCategoria = async ({nombre}) => {
         console.log('Respuesta del servidor:', responseData);
     }
     catch (error) {
-        console.log(error)
+        if(error.status === 401) console.error("No autorizado")
+        console.error(error)
     }
 }
 
