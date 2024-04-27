@@ -28,16 +28,12 @@ const postCategoria = async ({nombre}) => {
 }
 
 const getCategorias = async () => {
-    try {
-        const response = await fetch(`${categoriApi}`)
-        if(!response.ok){
-            throw new Error("Hubo un problema al enviar la  solicitud " + response.status )
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log(error)
+    const response = await fetch(`${categoriApi}`)
+    if(!response.ok){
+        throw new Error("Hubo un problema al enviar la  solicitud " + response.status )
     }
+    const data = await response.json();
+    return data;
 }
 
 const deleteCategoria = async (id) => {
@@ -98,5 +94,5 @@ const getRankCategoria = async({date}) => {
 }
 
 
-export { deleteCategoria, getCategorias, postCategoria, updateCategoria, getRankCategoria };
+export { deleteCategoria, getCategorias, getRankCategoria, postCategoria, updateCategoria };
 

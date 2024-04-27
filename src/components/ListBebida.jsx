@@ -16,12 +16,16 @@ export default function ListBebida({ pedido, setPedido, total, setTotal }) {
       {bebidas.map((bebida) => (
         <article
           key={bebida.id}
-          className="max-w-[400px] grid grid-cols-2 items-center py-4 mx-auto"
+          className="max-w-[400px] h-52  flex justify-center lg:grid grid-cols-2 items-center py-4 mx-auto"
         >
-          <div className="size-40 col-span-1">
-            <img src={bebida.imagen_url} alt={bebida.nombre} />
+          <div className="size-40 col-span-1 p-2">
+            <img
+              src={bebida.imagen_url}
+              alt={bebida.nombre}
+              className="rounded-3xl w-full h-full object-cover"
+            />
           </div>
-          <div className="flex flex-col justify-center items-center gap-3  col-span-1">
+          <div className="flex flex-col justify-evenly h-full p-2   items-center col-span-1">
             <h3 className="text-xl font-semibold text-center">
               {bebida.nombre}
             </h3>
@@ -30,9 +34,9 @@ export default function ListBebida({ pedido, setPedido, total, setTotal }) {
             </p>
             <button
               onClick={() => handleAgregarProducto(bebida)}
-              className="px-10 py-3 bg-primary-500 rounded-2xl text-white hover:bg-primary-600"
+              className="px-4 py-3 bg-primary-500 rounded-2xl text-white hover:bg-primary-600"
             >
-              ADD
+              AGREGAR
             </button>
           </div>
         </article>

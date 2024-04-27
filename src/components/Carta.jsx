@@ -29,12 +29,14 @@ export default function Carta({ pedido, setPedido, total, setTotal }) {
         Platos a la carta
       </h1>
 
-      <div className="grid grid-cols-4 gap-4 text-center px-12 mt-8 mb-12 text-xl text-primary-800">
+      <div className="grid grid-cols-4 gap-4  text-center px-12 mt-8 mb-12 text-xl text-primary-800">
         <>
           {loadingCategorias ? (
-            <p className="text-center">Cargando...</p>
+            <p className="text-center col-span-4">Cargando...</p>
           ) : errorCategorias ? (
-            <p className="text-center">Hubo un error</p>
+            <p className="text-center text-base font-bold  col-span-4">
+              Error al obtener Categorias: {errorCategorias}
+            </p>
           ) : filterCaterias.length === 0 ? (
             <p className="text-center">No hay categorias</p>
           ) : (
@@ -47,9 +49,9 @@ export default function Carta({ pedido, setPedido, total, setTotal }) {
                     active === categoria.id
                       ? "border-b-4 border-primary-500"
                       : "border-[#f1f1f1]"
-                  } text-black transition border-b-2 `}
+                  } text-primary-800 transition border-b-2 `}
                 >
-                  {categoria.nombre}
+                  {categoria.nombre.toUpperCase()}
                 </button>
               ))}
             </>

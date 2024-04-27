@@ -14,7 +14,7 @@ export default function useCategorias() {
         const categorias = await getCategorias();
         setCategorias(categorias);
       } catch (error) {
-        setErrorCategorias(error);
+        setErrorCategorias(error.message);
       } finally {
         setLoadingCategorias(false);
       }

@@ -14,7 +14,7 @@ export default function useExtras() {
         const data = await getExtras();
         setExtras(data);
       } catch (error) {
-        setErrorExtras(error);
+        setErrorExtras(error.message);
       } finally {
         setLoadingExtras(false);
       }

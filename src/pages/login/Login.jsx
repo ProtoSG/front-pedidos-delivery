@@ -8,6 +8,7 @@ export default function Login({ setUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,14 +37,14 @@ export default function Login({ setUser }) {
         }
       }
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
+      setError(error.message);
     }
   };
 
   return (
-    <main className="flex flex-col justify-center items-center h-screen">
+    <main className="flex flex-col relative justify-center items-center h-dvh -top-20">
       <Panel />
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-80 mt-14">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-80 mt-10">
         <input
           name="username"
           type="text"
@@ -61,7 +62,13 @@ export default function Login({ setUser }) {
         <button className="mt-6 px-10 py-3 bg-primary-500 rounded-3xl text-white hover:bg-primary-600 text-xl">
           Ingresar
         </button>
-        <span className="text-red-500 text-center text-lg">{message}</span>
+        {error ? (
+          <p className="text-red-500 text-center text-lg">
+            Error en el servidor: {error}
+          </p>
+        ) : (
+          <span className="text-red-500 text-center text-lg">{message}</span>
+        )}
       </form>
     </main>
   );

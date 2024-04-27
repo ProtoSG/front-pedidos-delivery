@@ -27,21 +27,21 @@ const postExtra = async ({nombre, precio, imagen_url}) => {
         console.log('Respuesta del servidor:', responseData);
     }
     catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
 const getExtras = async () => {
-    try {
+    // try {
         const response = await fetch(`${extrasApi}`)
         if(!response.ok){
             throw new Error("Hubo un problema al enviar la  solicitud " + response.status )
         }
         const data = await response.json();
         return data;
-    } catch (error) {
-        console.log(error)
-    }
+    // } catch (error) {
+    //     console.error(error)
+    // }
 }
 
 const deleteExtra = async (id) => {
@@ -58,7 +58,7 @@ const deleteExtra = async (id) => {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -83,7 +83,7 @@ const updateExtra = async (id, nombre, precio, imagen_url) => {
         const responseData = await response.json();
         console.log('Respuesta del servidor:', responseData);
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 

@@ -35,7 +35,9 @@ export default function ListProducts({
       {loadingProductos ? (
         <p className="text-center">Cargando...</p>
       ) : errorProductos ? (
-        <p className="text-center">Hubo un error</p>
+        <p className="text-center font-bold">
+          Error al obtener los Productos: {errorProductos}
+        </p>
       ) : limitData.length === 0 ? (
         <p className="text-center">No hay productos</p>
       ) : (
@@ -43,26 +45,28 @@ export default function ListProducts({
           {limitData[currentPage]?.map((producto) => (
             <article
               key={producto.id}
-              className="flex items-center py-4 justify-center"
+              className=" h-52 grid grid-cols-3 items-center py-4 justify-center px-4"
             >
-              <div className="size-40">
+              <div className="col-span-1 h-full min-h-full ">
                 <img
                   src={producto.imagen_url}
                   alt={producto.nombre}
-                  className="rounded-3xl"
+                  className="rounded-3xl w-full h-full object-cover"
                 />
               </div>
-              <div className="flex flex-col gap-3 ml-14 ">
+              <div className="flex flex-col ml-14 h-full justify-evenly col-span-2">
                 <h1 className="font-bold text-xl">{producto.nombre}</h1>
-                <p>{producto.descripcion}</p>
-                <div className="flex items-center justify-between gap-20">
-                  <button
-                    onClick={() => handleAgregarProducto(producto)}
-                    className="px-10 py-3 bg-primary-500 rounded-2xl text-white hover:bg-primary-600"
-                  >
-                    ADD
-                  </button>
-                  <span className="text-xl font-bold">
+                <p>{producto.descripcion.substring(0, 80) + "..."}</p>
+                <div className="grid grid-cols-3 items-center">
+                  <div className="col-span-2 pr-4">
+                    <button
+                      onClick={() => handleAgregarProducto(producto)}
+                      className="py-3 w-full bg-primary-500 rounded-2xl text-white hover:bg-primary-600"
+                    >
+                      AGREGAR
+                    </button>
+                  </div>
+                  <span className="col-span-1 text-center text-base lg:text-xl font-bold">
                     S/ {producto.precio.toFixed(2)}
                   </span>
                 </div>

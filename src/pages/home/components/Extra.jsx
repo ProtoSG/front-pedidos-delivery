@@ -6,7 +6,6 @@ import ButtonPri from "../../administrador/components/ButtonPri";
 
 export default function Extra({ pedido, setPedido, total, setTotal }) {
   const { extras, loadingExtras, errorExtras } = useExtras();
-  console.log(extras, loadingExtras, errorExtras);
   const closeModal = () => {
     const modal2 = document.getElementById("modal-2");
     modal2.close();
@@ -20,7 +19,7 @@ export default function Extra({ pedido, setPedido, total, setTotal }) {
   return (
     <dialog
       id="modal-2"
-      className={`rounded-2xl border-none px-10 py-3 transition-all backdrop:backdrop-blur-sm backdrop:bg-black/50 min-w-[500px] max-w-[680px] w-6/12 h-[560px] fixed`}
+      className={`rounded-2xl border-none px-10 py-3 transition-all backdrop:backdrop-blur-sm backdrop:bg-black/50 w-[95%]  max-w-[500px] h-[560px] fixed`}
     >
       <div className="flex flex-col justify-between w-full h-full">
         <h1 className="text-2xl text-center text-primary-800 font-bold">

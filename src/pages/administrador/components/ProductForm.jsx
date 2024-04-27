@@ -49,7 +49,6 @@ export default function ProductForm({ edit, producto }) {
       default:
         break;
     }
-    console.log(e.target.value);
   };
 
   useEffect(() => {

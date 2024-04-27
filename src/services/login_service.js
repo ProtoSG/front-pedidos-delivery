@@ -4,7 +4,6 @@ const loginApi = `${api}/login`;
 
 
 const login = async({username, password}) => {
-    try {
         const response = await fetch(`${loginApi}`, {
             method: 'POST',
             headers: {
@@ -26,9 +25,6 @@ const login = async({username, password}) => {
         }else{
             return new Error("No se encontro un token en la respuesta del servidor")
         }
-    } catch (error) {
-        console.error(error)        
-    }
 }
 
 const logout = () => {

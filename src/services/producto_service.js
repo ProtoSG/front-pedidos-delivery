@@ -34,16 +34,12 @@ const postProducto = async ({nombre, precio, categoria_id, descripcion, imagen_u
 }
 
 const getProductos = async () => {
-    try {
-        const response = await fetch(`${productoApi}`)
-        if(!response.ok){
-            throw new Error("Hubo un problema al enviar la  solicitud " + response.status )
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log(error)
+    const response = await fetch(`${productoApi}`)
+    if(!response.ok){
+        throw new Error("Hubo un problema al enviar la  solicitud " + response.status )
     }
+    const data = await response.json();
+    return data;
 }
 
 const deleteProducto = async (id) => {

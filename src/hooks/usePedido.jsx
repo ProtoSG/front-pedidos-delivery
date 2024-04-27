@@ -14,7 +14,6 @@ export default function usePedido() {
       setTotal(JSON.parse(localTotal));
     }
   }, []);
-  console.log(pedido)
   return {
     pedido,
     total,

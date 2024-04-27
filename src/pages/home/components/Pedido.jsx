@@ -70,9 +70,9 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
     <>
       <dialog
         id="modal"
-        className={`rounded-2xl border-none px-10 py-3 transition-all backdrop:backdrop-blur-sm backdrop:bg-black/50 min-w-[500px] max-w-[680px] w-6/12 h-[560px] fixed`}
+        className={`rounded-2xl border-none px-10 py-3 transition-all  w-[95%] lg:w-full backdrop:backdrop-blur-sm backdrop:bg-black/50  max-w-[500px] h-[560px] fixed`}
       >
-        <div className="flex flex-col justify-between w-full h-full">
+        <div className="flex flex-col justify-between w-full h-full ">
           <h1 className="text-2xl text-center text-primary-800 font-bold">
             Pedido
           </h1>
