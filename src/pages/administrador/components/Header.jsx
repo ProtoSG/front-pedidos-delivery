@@ -12,6 +12,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import pez from "../../../assets/pez1.png";
 import Logo from "../../../components/icons/Logo";
 import { logout } from "../../../services/login_service";
+import { IconUser } from '@tabler/icons-react';
 
 function SpanItem({ icon, isSelected }) {
   return (
@@ -33,9 +34,8 @@ function ItemHeader({ name, link, icon, onClick }) {
       <Link
         onClick={onClick}
         to={`${link}`}
-        className={`flex justify-center lg:pl-8 lg:justify-normal py-2 items-center hover:bg-primary-100 group ${
-          isSelected && "bg-primary-100 border-r-4 border-primary-600"
-        }`}
+        className={`flex justify-center lg:pl-8 lg:justify-normal py-2 items-center hover:bg-primary-100 group ${isSelected && "bg-primary-100 border-r-4 border-primary-600"
+          }`}
       >
         <SpanItem isSelected={isSelected} icon={icon} />
         <span className="hidden lg:block ml-4">{name}</span>
@@ -75,9 +75,8 @@ export default function Header() {
         )}
       </button>
       <header
-        className={`transition-all h-full lg:block lg:translate-x-0 fixed z-10 bg-[#f3f4f6]  py-20 lg:py-10 border-r-2 border-primary-800 w-24 lg:w-auto ${
-          active ? "translate-x-0 w-24" : "-translate-x-full w-0"
-        }`}
+        className={`transition-all h-full lg:block lg:translate-x-0 fixed z-10 bg-[#f3f4f6]  py-20 lg:py-10 border-r-2 border-primary-800 w-24 lg:w-auto ${active ? "translate-x-0 w-24" : "-translate-x-full w-0"
+          }`}
       >
         <div className="mb-10 lg:px-14">
           <Logo className="fill-primary-400 w-12 lg:w-28 mx-auto  hidden lg:block" />
@@ -98,6 +97,12 @@ export default function Header() {
               name="Reporte"
               link="/admin/report"
               icon={<IconChartInfographic />}
+              onClick={handleActive}
+            />
+            <ItemHeader
+              name="Perfil"
+              link="/admin/perfil"
+              icon={<IconUser />}
               onClick={handleActive}
             />
             <ItemHeader name="Home" link="/" icon={<IconHome />} />

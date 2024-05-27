@@ -11,6 +11,8 @@ import UpdateExtra from "./pages/administrador/pages/UpdateExtra";
 import UpdateProduct from "./pages/administrador/pages/UpdateProduct";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
+import UpdatePerfil from "./pages/administrador/pages/UpdatePerfil";
+import Perfil from "./pages/administrador/pages/Perfil";
 
 function App() {
   const { user, setUser } = useAdmin();
@@ -27,6 +29,8 @@ function App() {
           <Route path="update-categoria/:id" element={<UpdateCategory />} />
           <Route path="update-producto/:id" element={<UpdateProduct />} />
           <Route path="update-extra/:id" element={<UpdateExtra />} />
+          <Route path="perfil" element={<Perfil user={user} />} />
+          <Route path="perfil/update/:id" element={<UpdatePerfil />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
