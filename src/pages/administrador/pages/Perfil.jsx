@@ -1,16 +1,18 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { IconEye } from '@tabler/icons-react';
 import { IconEyeOff } from '@tabler/icons-react';
 import { IconPencil } from '@tabler/icons-react';
-import ButtonPri from "../components/ButtonPri";
 import { Link } from "react-router-dom";
+import useAdmin from "../../../hooks/useAdmin";
 
-export default function Perfil({ user }) {
+export default function Perfil() {
   const [activePassword, setActivePassword] = useState(false)
 
   const handleActive = () => {
     setActivePassword(!activePassword)
   }
+
+  const { user } = useAdmin()
 
   return (
     <main className="flex flex-col w-full h-full px-10">

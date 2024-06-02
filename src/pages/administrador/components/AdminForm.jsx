@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ItemInput from "./ItemInput";
 import { updateAdmin } from "../../../services/admin_service";
+import { login } from "../../../services/login_service";
 
 export default function AdminForm({ admin }) {
   const [username, setUsername] = useState("");
@@ -21,8 +22,10 @@ export default function AdminForm({ admin }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     // TODO: Agregar updateAdmin
+
     await updateAdmin(admin.id, username, password)
-    navigate("/admin");
+    const user = await login({ username, password });
+    navigate("/admin/perfil");
   };
 
   return (
