@@ -12,7 +12,7 @@ export default function Venta({ activeInterval }) {
   const [nombre, setNombre] = useState(null);
   const [total, setTotal] = useState(0);
 
-  const { dataDias: dayData } = useDataDias();
+  const { dataDias: dayData, loadingDataDias, errorDataDias } = useDataDias();
   const { dataSemanas: weekData } = useDataSemanas();
   const { dataMeses: monthData } = useDataMeses();
   const { dataAnos: yearData } = useDataAnos();
@@ -57,6 +57,9 @@ export default function Venta({ activeInterval }) {
     yearData,
     weekData,
   ]);
+
+  if (loadingDataDias) return <p>Cargando...</p>;
+  if (errorDataDias) return <p>Hubo un error</p>;
 
   return (
     <article className="col-span-1 lg:col-span-2 row-span-1 border-2 grid grid-rows-7 grid-cols-1 border-gray-400 rounded-2xl px-6 py-4">

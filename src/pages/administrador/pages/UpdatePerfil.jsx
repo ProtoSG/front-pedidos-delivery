@@ -1,11 +1,12 @@
-import { useParams } from "react-router-dom"
-import { getAdminById } from "../../../services/admin_service"
 import AdminForm from "../components/AdminForm"
 import useAdmin from "../../../hooks/useAdmin"
 
 export default function UpdatePerfil() {
 
-  const { user: admin } = useAdmin()
+  const { admin, loadingAdmin, errorAdmin } = useAdmin()
+
+  if (loadingAdmin) return <h1>Cargando...</h1>
+  if (errorAdmin) return <h1>Hubo un error</h1>
 
   return (
     <main className="flex flex-col w-full px-10">

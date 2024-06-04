@@ -29,7 +29,7 @@ export default function RankingProductos({ activeInterval }) {
   const [productos, setProductos] = useState(null);
   const [total, setTotal] = useState(0);
 
-  const { productos: productosDia } = useRankProducto({ date: "dia" });
+  const { productos: productosDia, loadingProductos: loadingDia, errorProductos: errorDia } = useRankProducto({ date: "dia" });
   const { productos: productosSemana } = useRankProducto({ date: "semana" });
   const { productos: productosMes } = useRankProducto({ date: "mes" });
   const { productos: productosAno } = useRankProducto({ date: "año" });
@@ -84,6 +84,9 @@ export default function RankingProductos({ activeInterval }) {
     productosMes,
     productosAno,
   ]);
+
+  if (loadingDia) return <p>Cargando...</p>;
+  if (errorDia) return <p>Hubo un error al cargar los datos</p>;
 
   return (
     <article className="col-span-1 row-span-1 border-2  border-gray-400 rounded-2xl px-6 py-4 ">

@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
-import { getAdmin } from "../services/admin_service";
+import { updateAdmin } from "../../../services/admin_service";
 
-export default function useAdmin() {
+export default function useUpdateAdmin(username, checkPassword, password) {
   const [admin, setAdmin] = useState({});
   const [loadingAdmin, setLoadingAdmin] = useState(true);
-  const [errorAdmin, setErrorAdmin] = useState(false);
+  const [errorAdmin, setErrorAdmin] = useState(null);
 
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
-        const admin = await getAdmin();
+        const admin = await updateAdmin(username, checkPassword, password);
         setAdmin(admin);
         setLoadingAdmin(false);
       } catch (error) {
-        setErrorAdmin(true);
+        setErrorAdmin(error.message);
         setLoadingAdmin(false);
       }
     };
     fetchAdmin();
   }, []);
 
-  console.log('useAdmin', admin);
   return { admin, loadingAdmin, errorAdmin };
 }
+

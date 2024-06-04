@@ -2,9 +2,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { experiedToken } from "../../../services/login_service";
 
-export const ProtectedRoute = ({ user, redirectTo = "/login" }) => {
+export const ProtectedRoute = ({ redirectTo = "/login" }) => {
   const tokenExpired = experiedToken();
-  if (!user || tokenExpired) {
+  if (tokenExpired) {
     return <Navigate to={redirectTo} replace />;
   }
   return <Outlet />;

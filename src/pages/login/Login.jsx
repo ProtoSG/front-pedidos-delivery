@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Panel from "../../components/Panel";
 import { login } from "../../services/login_service";
 
-export default function Login({ setUser }) {
+export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -25,16 +25,10 @@ export default function Login({ setUser }) {
       return;
     }
     try {
-      const user = await login({ username, password });
+      const { token } = await login({ username, password });
 
-      if (user) {
-        const { mensaje, token } = user;
-        setUser(user);
-        if (mensaje) setMessage(mensaje);
-
-        if (token) {
-          navigate("/admin");
-        }
+      if (token) {
+        navigate("/admin");
       }
     } catch (error) {
       setError(error.message);

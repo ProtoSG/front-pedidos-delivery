@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import DataTable from "react-data-table-component";
 
-export default function Table({ title, columns, data }) {
+export default function Table({ title, columns, data, loading, error }) {
   const customStyles = {
     headCells: {
       style: {
@@ -18,6 +18,10 @@ export default function Table({ title, columns, data }) {
     fixedHeader: true,
     fixedHeaderScrollHeight: "70%",
   };
+
+
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="w-full h-full text-lg p-3 rounded-3xl border-2 border-gray-400 bg-[#FFFFFF]">

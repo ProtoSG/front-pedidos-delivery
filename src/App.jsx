@@ -15,21 +15,20 @@ import UpdatePerfil from "./pages/administrador/pages/UpdatePerfil";
 import Perfil from "./pages/administrador/pages/Perfil";
 
 function App() {
-  const { user, setUser } = useAdmin();
 
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login setUser={setUser} />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/admin/*" element={<Layout />}>
-        <Route element={<ProtectedRoute user={user} />}>
+        <Route element={<ProtectedRoute />}>
           <Route path="" element={<Dashboard />} />
           <Route path="report" element={<Reporte />} />
           <Route path="add-product" element={<AddProduct />} />
           <Route path="update-categoria/:id" element={<UpdateCategory />} />
           <Route path="update-producto/:id" element={<UpdateProduct />} />
           <Route path="update-extra/:id" element={<UpdateExtra />} />
-          <Route path="perfil" element={<Perfil user={user} />} />
+          <Route path="perfil" element={<Perfil />} />
           <Route path="perfil/update/:id" element={<UpdatePerfil />} />
         </Route>
       </Route>

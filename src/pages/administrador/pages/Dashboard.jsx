@@ -40,7 +40,7 @@ export default function Dashboard() {
   const categoryColumns = createColumns(["ID", "Nombre", "Acciones"]);
   const extrasColumns = createColumns(["ID", "Nombre", "Precio", "Acciones"]);
 
-  const { categorias, loading, error } = useCategorias();
+  const { categorias, loadingCategorias, errorCategorias } = useCategorias();
   const { productos, loadingProductos, errorProductos } = useProductos();
   const { extras, loadingExtras, errorExtras } = useExtras();
 
@@ -81,8 +81,8 @@ export default function Dashboard() {
             title="Categorias"
             data={newCategorias}
             columns={categoryColumns}
-            loading={loading}
-            error={error}
+            loading={loadingCategorias}
+            error={errorCategorias}
           />
         </div>
         <div className="col-span-3 row-span-1 ">

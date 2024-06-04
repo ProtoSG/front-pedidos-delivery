@@ -16,11 +16,11 @@ Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 export default function VentasCategoria({ activeInterval }) {
   const [categorias, setCategorias] = useState(null);
 
-  const {categorias: categoriasDia} = useRankCategoria({date: 'dia'})
-  const {categorias: categoriasSemana} = useRankCategoria({date: 'semana'})
-  const {categorias: categoriasMes} = useRankCategoria({date: 'mes'})
-  const {categorias: categoriasAno} = useRankCategoria({date: 'año'})
-  
+  const { categorias: categoriasDia, loadingCategorias, errorCategorias } = useRankCategoria({ date: 'dia' })
+  const { categorias: categoriasSemana } = useRankCategoria({ date: 'semana' })
+  const { categorias: categoriasMes } = useRankCategoria({ date: 'mes' })
+  const { categorias: categoriasAno } = useRankCategoria({ date: 'año' })
+
   useEffect(() => {
 
     const categoriasData = new Map([
@@ -69,6 +69,10 @@ export default function VentasCategoria({ activeInterval }) {
       },
     ],
   };
+
+  if (loadingCategorias) return <p>Cargando...</p>;
+  if (errorCategorias) return <p>Hubo un error</p>;
+
   return (
     <article className="col-span-1 lg:col-span-2 row-span-1 border-2 border-gray-400 rounded-2xl px-6 py-4">
       <h2 className="text-lg font-semibold mb-5 ">Ventas por Categoría</h2>

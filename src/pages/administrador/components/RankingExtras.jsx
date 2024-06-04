@@ -11,11 +11,11 @@ Chart.defaults.plugins.legend.labels.boxHeight = 20;
 
 export default function RankingExtras({ activeInterval }) {
   const [extras, setExtras] = useState(null);
-  
-  const {extras: extrasDias} = useRankExtra({date: 'dia'})
-  const {extras: extrasSemanas} = useRankExtra({date: 'semana'})
-  const {extras: extrasMeses} = useRankExtra({date: 'mes'})
-  const {extras: extrasAnos} = useRankExtra({date: 'año'})
+
+  const { extras: extrasDias, loadingExtras, errorExtras } = useRankExtra({ date: 'dia' })
+  const { extras: extrasSemanas } = useRankExtra({ date: 'semana' })
+  const { extras: extrasMeses } = useRankExtra({ date: 'mes' })
+  const { extras: extrasAnos } = useRankExtra({ date: 'año' })
   console.log(extrasDias)
   useEffect(() => {
 
@@ -56,6 +56,9 @@ export default function RankingExtras({ activeInterval }) {
       },
     },
   };
+
+  if (loadingExtras) return <p>Cargando...</p>;
+  if (errorExtras) return <p>Hubo un error</p>;
 
   return (
     <article className="col-span-1 row-span-1 border-2 border-gray-400 rounded-2xl px-6 py-4">
