@@ -23,7 +23,5 @@ export default function useDataSemanas() {
     fetchdataSemanas();
   }, []);
 
-  console.log("semanas", dataSemanas);
-
   return { dataSemanas, loadingDataSemanas, errorDataSemanas };
 }

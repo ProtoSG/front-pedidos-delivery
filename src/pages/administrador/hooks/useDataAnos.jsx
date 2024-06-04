@@ -23,7 +23,5 @@ export default function useDataAnos() {
     fetchdataSemanas();
   }, []);
 
-  console.log("años", dataAnos);
-
   return { dataAnos, loadingDataAnos, errorDataAnos };
 }

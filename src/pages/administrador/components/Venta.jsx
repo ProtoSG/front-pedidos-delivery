@@ -17,8 +17,6 @@ export default function Venta({ activeInterval }) {
   const { dataMeses: monthData } = useDataMeses();
   const { dataAnos: yearData } = useDataAnos();
 
-  console.log(dayData);
-
   useEffect(() => {
     const seriesData = new Map([
       ["1D", dayData],

@@ -58,7 +58,6 @@ export default function ProductForm({ edit, producto }) {
   }, [categorias]);
 
   const onSubmit = async (e) => {
-    console.log(producto);
     e.preventDefault();
     if (edit) {
       await updateProducto(

@@ -16,10 +16,9 @@ const postPedido = async ({ total, productos, extras }) => {
       throw new Error("Hubo un problema al enviar la  solicitud " + response.status)
     }
     const responseData = await response.json();
-    console.log('Respuesta del servidor:', responseData);
+    return responseData;
   } catch (e) {
     console.error(e)
-
   }
 }
 
@@ -100,8 +99,6 @@ const getTotalAnos = async () => {
     console.error(e)
   }
 }
-
-
 
 export { getTotalAnos, getTotalDias, getTotalMeses, getTotalSemanas, postPedido };
 

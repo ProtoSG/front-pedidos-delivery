@@ -16,7 +16,6 @@ export default function RankingExtras({ activeInterval }) {
   const { extras: extrasSemanas } = useRankExtra({ date: 'semana' })
   const { extras: extrasMeses } = useRankExtra({ date: 'mes' })
   const { extras: extrasAnos } = useRankExtra({ date: 'año' })
-  console.log(extrasDias)
   useEffect(() => {
 
     const extrasData = new Map([

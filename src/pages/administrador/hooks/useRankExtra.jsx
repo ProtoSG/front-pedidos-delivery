@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { getRankExtra } from "../../../services/pedido_extra";
 
-export default function useRankExtra({date}) {
-    const [extras, setExtras] = useState([]);
-    const [loadingExtras, setLoadingExtras] = useState();
-    const [errorExtras, setErrorExtras] = useState();
+export default function useRankExtra({ date }) {
+  const [extras, setExtras] = useState([]);
+  const [loadingExtras, setLoadingExtras] = useState();
+  const [errorExtras, setErrorExtras] = useState();
 
   useEffect(() => {
     async function fetchProductos() {
@@ -22,8 +22,6 @@ export default function useRankExtra({date}) {
 
     fetchProductos();
   }, [date]);
-
-  console.log(extras)
 
   return { extras, loadingExtras, errorExtras };
 }

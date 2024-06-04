@@ -20,6 +20,5 @@ export default function useAdmin() {
     fetchAdmin();
   }, []);
 
-  console.log('useAdmin', admin);
   return { admin, loadingAdmin, errorAdmin };
 }

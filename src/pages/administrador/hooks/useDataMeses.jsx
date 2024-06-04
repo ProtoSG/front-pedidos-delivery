@@ -23,7 +23,5 @@ export default function useDataMeses() {
     fetchdataSemanas();
   }, []);
 
-  console.log("meses", dataMeses);
-
   return { dataMeses, loadingDataMeses, errorDataMeses };
 }

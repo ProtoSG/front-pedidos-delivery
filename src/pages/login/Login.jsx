@@ -20,17 +20,14 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (username === "" || password === "") {
-      console.log('Completar los espacios')
       setError("Completar los espacios");
       return;
     }
     const { mensaje, token } = await login({ username, password });
 
     if (mensaje) {
-      console.log(mensaje, 'mensaje')
       setError(mensaje);
     } else {
-      console.log(token, 'token')
       if (token) {
         navigate("/admin");
       }

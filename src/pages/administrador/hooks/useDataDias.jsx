@@ -23,7 +23,5 @@ export default function useDataDias() {
     fetchDataDias();
   }, []);
 
-  console.log(dataDias);
-
   return { dataDias, loadingDataDias, errorDataDias };
 }

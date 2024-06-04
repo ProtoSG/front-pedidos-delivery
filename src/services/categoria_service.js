@@ -19,7 +19,6 @@ const postCategoria = async ({ nombre }) => {
     }
 
     const responseData = await response.json();
-    console.log('Respuesta del servidor:', responseData);
   }
   catch (error) {
     if (error.status === 401) console.error("No autorizado")
@@ -50,7 +49,7 @@ const deleteCategoria = async (id) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
@@ -68,7 +67,6 @@ const updateCategoria = async (id, nombre) => {
       throw new Error("Hubo un problema al enviar la  solicitud " + response.status)
     }
     const res = await response.json();
-    console.log('Respuesta del servidor:', res);
   } catch (error) {
     console.error(error)
   }
