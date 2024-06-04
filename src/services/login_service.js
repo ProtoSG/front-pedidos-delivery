@@ -11,16 +11,14 @@ const login = async ({ username, password }) => {
     },
     body: JSON.stringify({ username, password }),
   })
-  const data = await response.json();
+  const { mensaje, token } = await response.json();
 
-  console.log(data)
   if (!response.ok) {
-    if (response.status === 404) return ({ 'mensaje': data.mensaje })
-    else if (response.status === 401) return ({ 'mensaje': data.mensaje })
+    return ({ 'mensaje': mensaje })
   }
-  if (data.token) {
-    localStorage.setItem('token', data.token)
-    return data;
+  if (token) {
+    localStorage.setItem('token', token)
+    return { token };
   } else {
     return new Error("No se encontro un token en la respuesta del servidor")
   }

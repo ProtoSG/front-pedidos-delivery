@@ -18,27 +18,34 @@ export default function AdminForm({ admin }) {
 
   const handleChange = (e) => {
     if (e.target.name === "Username") setUsername(e.target.value);
-    if (e.target.name === "Password") setPassword(e.target.value);
-    if (e.target.name === "CheckPassword") setCheckPassword(e.target.value);
+    if (e.target.name === "Nuevo Password") setPassword(e.target.value);
+    if (e.target.name === "Antiguo Password") setCheckPassword(e.target.value);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const { error } = updateAdmin(username, checkPassword, password)
-    if (error) {
-      setErrorAdmin(error);
-      return;
+    try {
+      console.log(username, checkPassword, password)
+      const { mensaje, succes } = await updateAdmin(username, checkPassword, password)
+
+      if (mensaje) {
+        setErrorAdmin(mensaje)
+      } else if (succes) {
+        setErrorAdmin(null)
+        await login({ username, password });
+        navigate("/admin/perfil");
+      }
+    } catch (error) {
+      setErrorAdmin(error.message)
     }
-    await login({ username, password });
-    navigate("/admin/perfil");
   };
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4">
       <label className="flex flex-col">
         <ItemInput handleChange={handleChange} name="Username" value={username} />
-        <ItemInput handleChange={handleChange} name="CheckPassword" />
-        <ItemInput handleChange={handleChange} name="NewPassword" />
+        <ItemInput handleChange={handleChange} name="Antiguo Password" />
+        <ItemInput handleChange={handleChange} name="Nuevo Password" />
         {errorAdmin && <p className="text-red-500 text-center text-lg">{errorAdmin}</p>}
       </label>
       <div className="flex justify-end gap-4 mt-6">

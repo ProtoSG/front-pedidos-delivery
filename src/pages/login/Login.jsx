@@ -7,7 +7,6 @@ import { login } from "../../services/login_service";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
@@ -21,18 +20,22 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (username === "" || password === "") {
-      setMessage("Completar los espacios");
+      console.log('Completar los espacios')
+      setError("Completar los espacios");
       return;
     }
-    try {
-      const { token } = await login({ username, password });
+    const { mensaje, token } = await login({ username, password });
 
+    if (mensaje) {
+      console.log(mensaje, 'mensaje')
+      setError(mensaje);
+    } else {
+      console.log(token, 'token')
       if (token) {
         navigate("/admin");
       }
-    } catch (error) {
-      setError(error.message);
     }
+
   };
 
   return (
@@ -56,12 +59,10 @@ export default function Login() {
         <button className="mt-6 px-10 py-3 bg-primary-500 rounded-3xl text-white hover:bg-primary-600 text-xl">
           Ingresar
         </button>
-        {error ? (
-          <p className="text-red-500 text-center text-lg">
-            Error en el servidor: {error}
+        {error ?? (
+          <p className="text-red-600 text-center text-lg">
+            {error}
           </p>
-        ) : (
-          <span className="text-red-500 text-center text-lg">{message}</span>
         )}
       </form>
     </main>
