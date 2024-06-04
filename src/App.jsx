@@ -29,7 +29,7 @@ function App() {
           <Route path="update-producto/:id" element={<UpdateProduct />} />
           <Route path="update-extra/:id" element={<UpdateExtra />} />
           <Route path="perfil" element={<Perfil />} />
-          <Route path="perfil/update/:id" element={<UpdatePerfil />} />
+          <Route path="perfil/update" element={<UpdatePerfil />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />

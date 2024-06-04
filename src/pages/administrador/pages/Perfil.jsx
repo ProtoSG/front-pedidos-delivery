@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react"
-import { IconEye } from '@tabler/icons-react';
-import { IconEyeOff } from '@tabler/icons-react';
+import { useState } from "react";
 import { IconPencil } from '@tabler/icons-react';
 import { Link } from "react-router-dom";
 import useAdmin from "../../../hooks/useAdmin";
 
 export default function Perfil() {
-  const [activePassword, setActivePassword] = useState(false)
-
-  const handleActive = () => {
-    setActivePassword(!activePassword)
-  }
-
   const { admin, loadingAdmin, errorAdmin } = useAdmin()
-  console.log('perfil', admin)
-
 
   if (loadingAdmin) return <h1>Cargando...</h1>
   if (errorAdmin) return <h1>Hubo un error</h1>
@@ -37,9 +27,9 @@ export default function Perfil() {
             </span>
           </div>
           <div className="flex justify-end">
-            <Link to={`/admin/perfil/update/${admin.id}`} className="px-6 py-2 text-white bg-primary-400 rounded-xl flex items-center gap-2 text-xl hover:bg-primary-500 transition-all" >
+            <Link to={'/admin/perfil/update'} className="px-6 py-2 text-white bg-primary-400 rounded-xl flex items-center gap-2 text-xl hover:bg-primary-500 transition-all" >
               <IconPencil className="size-8" />
-              Editar
+              Cambiar Contraseña
             </Link>
           </div>
 

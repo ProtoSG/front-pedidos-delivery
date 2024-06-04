@@ -18,21 +18,21 @@ const getAdmin = async () => {
   return data;
 }
 
-const updateAdmin = async (username, checkPassword, password) => {
+const updateAdmin = async (checkPassword, password) => {
   const response = await fetch(`${adminApi}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify({ username, checkPassword, password }),
+    body: JSON.stringify({ checkPassword, password }),
   })
-  const { message, succes } = await response.json();
+  const { message, success } = await response.json();
   if (!response.ok) {
     return { 'mensaje': message }
   }
-  if (succes) {
-    return { succes };
+  if (success) {
+    return { success };
   } else {
     return new Error("No se encontro un token en la respuesta del servidor")
   }

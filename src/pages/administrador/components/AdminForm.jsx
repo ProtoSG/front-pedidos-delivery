@@ -1,37 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ItemInput from "./ItemInput";
 import { updateAdmin } from "../../../services/admin_service";
 import { login } from "../../../services/login_service";
-import useUpdateAdmin from "../hooks/useUpdateAdmin";
 
 export default function AdminForm({ admin }) {
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [errorAdmin, setErrorAdmin] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setUsername(admin.username)
-  }, [])
-
   const handleChange = (e) => {
-    if (e.target.name === "Username") setUsername(e.target.value);
     if (e.target.name === "Nuevo Password") setPassword(e.target.value);
     if (e.target.name === "Antiguo Password") setCheckPassword(e.target.value);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      console.log(username, checkPassword, password)
-      const { mensaje, succes } = await updateAdmin(username, checkPassword, password)
+      const { mensaje, success } = await updateAdmin(checkPassword, password)
 
       if (mensaje) {
         setErrorAdmin(mensaje)
-      } else if (succes) {
+      } else if (success) {
         setErrorAdmin(null)
+        const username = admin.username;
         await login({ username, password });
         navigate("/admin/perfil");
       }
@@ -43,7 +37,6 @@ export default function AdminForm({ admin }) {
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4">
       <label className="flex flex-col">
-        <ItemInput handleChange={handleChange} name="Username" value={username} />
         <ItemInput handleChange={handleChange} name="Antiguo Password" />
         <ItemInput handleChange={handleChange} name="Nuevo Password" />
         {errorAdmin && <p className="text-red-500 text-center text-lg">{errorAdmin}</p>}
@@ -53,7 +46,7 @@ export default function AdminForm({ admin }) {
           id="categorias"
           className="px-4  bg-primary-500 text-white rounded-2xl py-3"
         >
-          Editar
+          Confirmar
         </button>
         <Link
           to="/admin"
