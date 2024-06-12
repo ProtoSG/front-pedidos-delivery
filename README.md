@@ -1,6 +1,6 @@
 # React + Vite
 
-    # back-pedidos-delivery
+    # front-pedidos-delivery
 
 ### Pasos para correr el programa
 
