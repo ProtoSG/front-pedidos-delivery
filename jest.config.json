@@ -1,0 +1,9 @@
+{
+  "testEnvironment": "jsdom",
+  "setupFilesAfterEnv": ["@testing-library/jest-dom"],
+  "moduleNameMapper": {
+    "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/fileMock.js",
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^@tests/(.*)$": "<rootDir>/tests/$1"
+  }
+}
