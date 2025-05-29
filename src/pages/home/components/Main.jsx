@@ -1,7 +1,14 @@
-/* eslint-disable react/prop-types */
 import Bebida from "../../../components/Bebida";
 import Carta from "../../../components/Carta";
 import Panel from "../../../components/Panel";
+import PropTypes from "prop-types";
+
+Main.propTypes = {
+  pedido: PropTypes.any.isRequired,
+  setPedido: PropTypes.func.isRequired,
+  total: PropTypes.any.isRequired,
+  setTotal: PropTypes.func.isRequired,
+};
 
 export default function Main({ pedido, setPedido, total, setTotal }) {
   return (

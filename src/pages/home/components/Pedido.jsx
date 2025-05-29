@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Toaster, toast } from "sonner";
 import {
   addCantidad,
@@ -10,6 +9,14 @@ import {
 import { IconMinus, IconPlus, IconTrash, IconX } from "@tabler/icons-react";
 import { postPedido } from "../../../services/pedido_service";
 import Extra from "./Extra";
+import PropTypes from "prop-types";
+
+Pedido.propTypes = {
+  pedido: PropTypes.array.isRequired,
+  setPedido: PropTypes.func.isRequired,
+  total: PropTypes.number.isRequired,
+  setTotal: PropTypes.func.isRequired,
+};
 
 export default function Pedido({ pedido, setPedido, total, setTotal }) {
   const handleClose = () => {
@@ -48,17 +55,17 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
     const message = `*Su pedido es*:${pedido[0]
       .map(
         (producto) => `
-      - ${producto.cantidad} ${producto.nombre}`
+      - ${producto.cantidad} ${producto.nombre}`,
       )
       .join("")}\n\n*Con Extras*:${pedido[1]
       .map(
         (extra) => `
-      - ${extra.cantidad} ${extra.nombre}`
+      - ${extra.cantidad} ${extra.nombre}`,
       )
       .join("")}\n\n *Total: S/ ${total.toFixed(2)}*
     `;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-      message
+      message,
     )}`;
     window.open(url, "_blank");
 
@@ -76,14 +83,15 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
           <h1 className="text-2xl text-center text-primary-800 font-bold">
             Pedido
           </h1>
-          <span
+          <button
             onClick={handleClose}
-            className="absolute right-4 top-4 hover:scale-125 transition cursor-pointer"
+            className="absolute right-4 top-4 hover:scale-125 transition cursor-pointer bg-transparent border-none p-0"
+            type="button"
           >
             <IconX />
-          </span>
+          </button>
           <div className="flex flex-col gap-4 mt-8 h-4/5 overflow-auto px-2 ">
-            <>
+            <section>
               {pedido[0].length === 0 ? (
                 <p>Pedido Vacio</p>
               ) : (
@@ -163,7 +171,7 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
                   </div>
                 ))
               )}
-            </>
+            </section>
           </div>
           <div className="flex flex-col gap-4 pt-4 mb-4 ">
             <button

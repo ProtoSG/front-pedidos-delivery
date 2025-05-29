@@ -1,8 +1,15 @@
-/* eslint-disable react/prop-types */
 import { IconShoppingBag, IconUserFilled } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import Logo from "../../../components/icons/Logo";
 import Pedido from "./Pedido";
+import PropTypes from "prop-types";
+
+Header.propTypes = {
+  pedido: PropTypes.array.isRequired,
+  setPedido: PropTypes.func.isRequired,
+  total: PropTypes.number.isRequired,
+  setTotal: PropTypes.func.isRequired,
+};
 
 export default function Header({ pedido, setPedido, total, setTotal }) {
   const handleOpen = () => {
@@ -17,20 +24,18 @@ export default function Header({ pedido, setPedido, total, setTotal }) {
           to={`/login`}
           className="absolute border-2 rounded-full p-2 hover:bg-primary-600 left-8 cursor-pointer hover:scale-110 transition-all"
         >
-          <span onClick={handleOpen} className="">
+          <button onClick={handleOpen} className="" type="button">
             <IconUserFilled className="w-6 lg:w-10 h-auto text-white" />
-          </span>
+          </button>
         </Link>
         <Logo className="fill-white w-32 lg:w-full" />
-        <span
+        <button
           onClick={handleOpen}
           className=" absolute right-8 cursor-pointer hover:scale-110 transition-all"
+          type="button"
         >
           <IconShoppingBag className="size-12 lg:size-14 text-white" />
-          <span className="text-white absolute -right-2 -bottom-1 bg-black size-6 lg:size-8 text-base lg:text-lg rounded-full flex justify-center items-center">
-            {pedido[0]?.length}
-          </span>
-        </span>
+        </button>
       </header>
       <Pedido
         pedido={pedido}
