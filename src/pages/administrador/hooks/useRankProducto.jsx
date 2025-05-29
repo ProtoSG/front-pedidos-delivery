@@ -12,6 +12,7 @@ export default function useRankProducto({ date }) {
         setLoadingProductos(true);
         setErrorProductos(null);
         const data = await getRankProducto({ date });
+        console.log("RANKING: ", data)
         setProductos(data);
       } catch (e) {
         setErrorProductos(e.message);

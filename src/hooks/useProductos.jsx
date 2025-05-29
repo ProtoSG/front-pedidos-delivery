@@ -12,6 +12,7 @@ export default function useProductos() {
         setLoadingProductos(true);
         setErrorProductos(null);
         const data = await getProductos();
+        console.log("PRODUCTOS: ", data)
         setProductos(data);
       } catch (error) {
         setErrorProductos(error.message);
