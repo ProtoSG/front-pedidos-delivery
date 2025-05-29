@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { IconPencil } from '@tabler/icons-react';
+import { IconPencil } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import useAdmin from "../../../hooks/useAdmin";
 
 export default function Perfil() {
-  const { admin, loadingAdmin, errorAdmin } = useAdmin()
+  const { admin, loadingAdmin, errorAdmin } = useAdmin();
 
-  if (loadingAdmin) return <h1>Cargando...</h1>
-  if (errorAdmin) return <h1>Hubo un error</h1>
+  if (loadingAdmin) return <h1>Cargando...</h1>;
+  if (errorAdmin) return <h1>Hubo un error</h1>;
 
   return (
     <main className="flex flex-col w-full h-full px-10">
@@ -22,20 +21,19 @@ export default function Perfil() {
           </div>
           <div className="flex gap-4 items-center">
             <span className=" font-bold text-xl">Contraseña: </span>
-            <span className="text-lg flex gap-6 items-center">
-              ********
-            </span>
+            <span className="text-lg flex gap-6 items-center">********</span>
           </div>
           <div className="flex justify-end">
-            <Link to={'/admin/perfil/update'} className="px-6 py-2 text-white bg-primary-400 rounded-xl flex items-center gap-2 text-xl hover:bg-primary-500 transition-all" >
+            <Link
+              to={"/admin/perfil/update"}
+              className="px-6 py-2 text-white bg-primary-400 rounded-xl flex items-center gap-2 text-xl hover:bg-primary-500 transition-all"
+            >
               <IconPencil className="size-8" />
               Cambiar Contraseña
             </Link>
           </div>
-
         </section>
       </div>
     </main>
-  )
+  );
 }
-

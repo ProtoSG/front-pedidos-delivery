@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import CategoryForm from "../components/CategoryForm";
 import ExtraForm from "../components/ExtraForm";
@@ -22,10 +21,6 @@ const lista = [
 const AddProduct = () => {
   const [active, setActive] = useState("Productos");
 
-  const handleClick = (e) => {
-    setActive(e.target.innerText);
-  };
-
   const renderForm = () => {
     switch (active) {
       case "Productos":
@@ -48,7 +43,7 @@ const AddProduct = () => {
             {lista.map((item) => (
               <button
                 key={item.id}
-                onClick={handleClick}
+                onClick={() => setActive(item.name)}
                 className={`transition ${
                   active === item.name
                     ? "text-primary-500 border-b-2 border-primary-500"
