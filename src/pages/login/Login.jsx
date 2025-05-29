@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Panel from "../../components/Panel";
@@ -27,12 +26,9 @@ export default function Login() {
 
     if (mensaje) {
       setError(mensaje);
-    } else {
-      if (token) {
-        navigate("/admin");
-      }
+    } else if (token) {
+      navigate("/admin");
     }
-
   };
 
   return (
@@ -56,11 +52,7 @@ export default function Login() {
         <button className="mt-6 px-10 py-3 bg-primary-500 rounded-3xl text-white hover:bg-primary-600 text-xl">
           Ingresar
         </button>
-        {error ?? (
-          <p className="text-red-600 text-center text-lg">
-            {error}
-          </p>
-        )}
+        {error ?? <p className="text-red-600 text-center text-lg">{error}</p>}
       </form>
     </main>
   );
