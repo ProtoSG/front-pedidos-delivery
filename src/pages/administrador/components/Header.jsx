@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   IconChartInfographic,
   IconChevronLeft,
@@ -6,13 +5,19 @@ import {
   IconHome,
   IconLayoutDashboard,
   IconLogout2,
+  IconUser,
 } from "@tabler/icons-react";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import pez from "../../../assets/pez1.png";
 import Logo from "../../../components/icons/Logo";
 import { logout } from "../../../services/login_service";
-import { IconUser } from '@tabler/icons-react';
+import PropTypes from "prop-types";
+
+SpanItem.propTypes = {
+  icon: PropTypes.node.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+};
 
 function SpanItem({ icon, isSelected }) {
   return (
@@ -26,6 +31,13 @@ function SpanItem({ icon, isSelected }) {
   );
 }
 
+ItemHeader.propTypes = {
+  name: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  icon: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
+};
+
 function ItemHeader({ name, link, icon, onClick }) {
   const location = useLocation();
   const isSelected = location.pathname === `${link}`;
@@ -34,8 +46,9 @@ function ItemHeader({ name, link, icon, onClick }) {
       <Link
         onClick={onClick}
         to={`${link}`}
-        className={`flex justify-center lg:pl-8 lg:justify-normal py-2 items-center hover:bg-primary-100 group ${isSelected && "bg-primary-100 border-r-4 border-primary-600"
-          }`}
+        className={`flex justify-center lg:pl-8 lg:justify-normal py-2 items-center hover:bg-primary-100 group ${
+          isSelected && "bg-primary-100 border-r-4 border-primary-600"
+        }`}
       >
         <SpanItem isSelected={isSelected} icon={icon} />
         <span className="hidden lg:block ml-4">{name}</span>
@@ -43,6 +56,7 @@ function ItemHeader({ name, link, icon, onClick }) {
     </li>
   );
 }
+
 export default function Header() {
   const navigate = useNavigate();
   const [active, setActive] = useState(false);
@@ -58,7 +72,7 @@ export default function Header() {
 
   window.addEventListener("scroll", function () {
     const st_header = document.getElementById("switch-header");
-    st_header.classList.toggle("bg-primary-200", this.window.scrollY > 0);
+    st_header.classList.toggle("bg-primary-200", window.scrollY > 0);
   });
 
   return (
@@ -75,8 +89,9 @@ export default function Header() {
         )}
       </button>
       <header
-        className={`transition-all h-full lg:block lg:translate-x-0 fixed z-10 bg-[#f3f4f6]  py-20 lg:py-10 border-r-2 border-primary-800 w-24 lg:w-auto ${active ? "translate-x-0 w-24" : "-translate-x-full w-0"
-          }`}
+        className={`transition-all h-full lg:block lg:translate-x-0 fixed z-10 bg-[#f3f4f6]  py-20 lg:py-10 border-r-2 border-primary-800 w-24 lg:w-auto ${
+          active ? "translate-x-0 w-24" : "-translate-x-full w-0"
+        }`}
       >
         <div className="mb-10 lg:px-14">
           <Logo className="fill-primary-400 w-12 lg:w-28 mx-auto  hidden lg:block" />
@@ -112,7 +127,7 @@ export default function Header() {
           onClick={handleSalir}
           className="text-xl w-full flex justify-center lg:pl-8 lg:justify-normal py-2 items-center hover:bg-primary-100 group"
         >
-          <SpanItem icon={<IconLogout2 />} />
+          <SpanItem icon={<IconLogout2 />} isSelected={false} />
           <span className="hidden lg:block ml-4">Salir</span>
         </button>
       </header>

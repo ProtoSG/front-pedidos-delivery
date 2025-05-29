@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+
 export default function ItemInput({ handleChange, name, value, type }) {
   return (
     <>
@@ -15,3 +16,10 @@ export default function ItemInput({ handleChange, name, value, type }) {
     </>
   );
 }
+
+ItemInput.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.any,
+  type: PropTypes.string,
+};

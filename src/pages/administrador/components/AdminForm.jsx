@@ -1,8 +1,15 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import ItemInput from "./ItemInput";
 import { updateAdmin } from "../../../services/admin_service";
 import { login } from "../../../services/login_service";
+import { useState } from "react";
+
+AdminForm.propTypes = {
+  admin: PropTypes.shape({
+    username: PropTypes.string,
+  }),
+};
 
 export default function AdminForm({ admin }) {
   const [password, setPassword] = useState("");
@@ -19,18 +26,18 @@ export default function AdminForm({ admin }) {
     e.preventDefault();
 
     try {
-      const { mensaje, success } = await updateAdmin(checkPassword, password)
+      const { mensaje, success } = await updateAdmin(checkPassword, password);
 
       if (mensaje) {
-        setErrorAdmin(mensaje)
+        setErrorAdmin(mensaje);
       } else if (success) {
-        setErrorAdmin(null)
+        setErrorAdmin(null);
         const username = admin.username;
         await login({ username, password });
         navigate("/admin/perfil");
       }
     } catch (error) {
-      setErrorAdmin(error.message)
+      setErrorAdmin(error.message);
     }
   };
 
@@ -39,7 +46,9 @@ export default function AdminForm({ admin }) {
       <label className="flex flex-col">
         <ItemInput handleChange={handleChange} name="Antiguo Password" />
         <ItemInput handleChange={handleChange} name="Nuevo Password" />
-        {errorAdmin && <p className="text-red-500 text-center text-lg">{errorAdmin}</p>}
+        {errorAdmin && (
+          <p className="text-red-500 text-center text-lg">{errorAdmin}</p>
+        )}
       </label>
       <div className="flex justify-end gap-4 mt-6">
         <button
@@ -58,4 +67,3 @@ export default function AdminForm({ admin }) {
     </form>
   );
 }
-

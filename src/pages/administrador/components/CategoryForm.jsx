@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -6,6 +6,14 @@ import {
   updateCategoria,
 } from "../../../services/categoria_service";
 import ItemInput from "./ItemInput";
+
+CategoryForm.propTypes = {
+  edit: PropTypes.bool,
+  categoria: PropTypes.shape({
+    id: PropTypes.number,
+    nombre: PropTypes.string,
+  }),
+};
 
 export default function CategoryForm({ edit, categoria }) {
   const [nombre, setNombre] = useState("");
@@ -41,7 +49,7 @@ export default function CategoryForm({ edit, categoria }) {
           id="categorias"
           className="px-4  bg-primary-500 text-white rounded-2xl py-3"
         >
-          <>{edit ? "Editar" : "Agregar"}</>
+          <h3>{edit ? "Editar" : "Agregar"}</h3>
         </button>
         <Link
           to="/admin"

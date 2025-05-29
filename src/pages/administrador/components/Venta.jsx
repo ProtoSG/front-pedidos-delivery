@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import useDataAnos from "../hooks/useDataAnos";
 import useDataDias from "../hooks/useDataDias";
@@ -73,3 +73,7 @@ export default function Venta({ activeInterval }) {
     </article>
   );
 }
+
+Venta.propTypes = {
+  activeInterval: PropTypes.string.isRequired,
+};

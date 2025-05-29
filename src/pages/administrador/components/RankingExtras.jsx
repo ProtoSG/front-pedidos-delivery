@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import { ArcElement, Chart, Legend, Tooltip } from "chart.js";
 import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
@@ -12,12 +12,15 @@ Chart.defaults.plugins.legend.labels.boxHeight = 20;
 export default function RankingExtras({ activeInterval }) {
   const [extras, setExtras] = useState(null);
 
-  const { extras: extrasDias, loadingExtras, errorExtras } = useRankExtra({ date: 'dia' })
-  const { extras: extrasSemanas } = useRankExtra({ date: 'semana' })
-  const { extras: extrasMeses } = useRankExtra({ date: 'mes' })
-  const { extras: extrasAnos } = useRankExtra({ date: 'año' })
+  const {
+    extras: extrasDias,
+    loadingExtras,
+    errorExtras,
+  } = useRankExtra({ date: "dia" });
+  const { extras: extrasSemanas } = useRankExtra({ date: "semana" });
+  const { extras: extrasMeses } = useRankExtra({ date: "mes" });
+  const { extras: extrasAnos } = useRankExtra({ date: "año" });
   useEffect(() => {
-
     const extrasData = new Map([
       ["1D", extrasDias],
       ["1S", extrasSemanas],
@@ -68,3 +71,7 @@ export default function RankingExtras({ activeInterval }) {
     </article>
   );
 }
+
+RankingExtras.propTypes = {
+  activeInterval: PropTypes.string.isRequired,
+};

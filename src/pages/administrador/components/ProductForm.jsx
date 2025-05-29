@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import useCategorias from "../../../hooks/useCategorias";
 import {
@@ -7,6 +6,12 @@ import {
   updateProducto,
 } from "../../../services/producto_service";
 import ItemInput from "./ItemInput";
+import { useState, useEffect } from "react";
+
+ProductForm.propTypes = {
+  edit: PropTypes.bool,
+  producto: PropTypes.object,
+};
 
 export default function ProductForm({ edit, producto }) {
   const [nombre, setNombre] = useState("");
@@ -66,7 +71,7 @@ export default function ProductForm({ edit, producto }) {
         precio,
         categoria_id,
         descripcion,
-        imagen_url
+        imagen_url,
       );
     } else {
       await postProducto({
@@ -131,7 +136,7 @@ export default function ProductForm({ edit, producto }) {
           id="productos"
           className="px-4  bg-primary-500 text-white rounded-2xl py-3"
         >
-          <>{edit ? "Editar" : "Agregar"}</>
+          <h3>{edit ? "Editar" : "Agregar"}</h3>
         </button>
         <Link
           to="/admin"

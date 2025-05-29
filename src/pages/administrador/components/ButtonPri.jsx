@@ -1,3 +1,11 @@
+import PropTypes from "prop-types";
+
+ButtonPri.propTypes = {
+  nombre: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.node,
+};
+
 export default function ButtonPri({ nombre, onClick, children }) {
   return (
     <button
@@ -7,5 +15,5 @@ export default function ButtonPri({ nombre, onClick, children }) {
       {children}
       {nombre}
     </button>
-  )
+  );
 }

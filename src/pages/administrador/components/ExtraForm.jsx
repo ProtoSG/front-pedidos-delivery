@@ -1,9 +1,9 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { postExtra, updateExtra } from "../../../services/extra_service";
 import ItemInput from "./ItemInput";
 
-/* eslint-disable react/prop-types */
 export default function ExtraForm({ edit, extra }) {
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
@@ -70,7 +70,7 @@ export default function ExtraForm({ edit, extra }) {
           onClick={onSubmit}
           className="px-4  bg-primary-500 text-white rounded-2xl py-3"
         >
-          <>{edit ? "Editar" : "Agregar"}</>
+          <h3>{edit ? "Editar" : "Agregar"}</h3>
         </button>
         <Link
           to="/admin"
@@ -82,3 +82,13 @@ export default function ExtraForm({ edit, extra }) {
     </form>
   );
 }
+
+ExtraForm.propTypes = {
+  edit: PropTypes.bool,
+  extra: PropTypes.shape({
+    id: PropTypes.number,
+    nombre: PropTypes.string,
+    precio: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    imagen_url: PropTypes.string,
+  }),
+};

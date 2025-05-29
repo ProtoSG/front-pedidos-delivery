@@ -1,6 +1,11 @@
+import PropTypes from "prop-types";
 import { ColorType, createChart } from "lightweight-charts";
 import { useEffect, useRef } from "react";
-/* eslint-disable react/prop-types */
+
+ChartArea.propTypes = {
+  setChart: PropTypes.func.isRequired,
+  setAreaSeries: PropTypes.func.isRequired,
+};
 
 export default function ChartArea({ setChart, setAreaSeries }) {
   const chartContainerRef = useRef();
@@ -59,9 +64,5 @@ export default function ChartArea({ setChart, setAreaSeries }) {
     };
   }, [setAreaSeries, setChart]);
 
-  return (
-    <>
-      <div className="h-full" ref={chartContainerRef}></div>
-    </>
-  );
+  return <div className="h-full" ref={chartContainerRef}></div>;
 }

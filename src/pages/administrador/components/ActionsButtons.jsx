@@ -1,9 +1,14 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { deleteCategoria } from "../../../services/categoria_service";
 import { deleteExtra } from "../../../services/extra_service";
 import { deleteProducto } from "../../../services/producto_service";
+
+ActionButtons.propTypes = {
+  data: PropTypes.object.isRequired,
+  tabla: PropTypes.string.isRequired,
+};
 
 export default function ActionButtons({ data, tabla }) {
   const handleDelete = async (id) => {

@@ -1,7 +1,12 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import useRankProducto from "../hooks/useRankProducto";
 
-/* eslint-disable react/prop-types */
+ItemProducto.propTypes = {
+  total: PropTypes.number.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
 function ItemProducto({ total, data }) {
   const [width, setWidth] = useState(0);
 
@@ -25,11 +30,19 @@ function ItemProducto({ total, data }) {
   );
 }
 
+RankingProductos.propTypes = {
+  activeInterval: PropTypes.string.isRequired,
+};
+
 export default function RankingProductos({ activeInterval }) {
   const [productos, setProductos] = useState(null);
   const [total, setTotal] = useState(0);
 
-  const { productos: productosDia, loadingProductos: loadingDia, errorProductos: errorDia } = useRankProducto({ date: "dia" });
+  const {
+    productos: productosDia,
+    loadingProductos: loadingDia,
+    errorProductos: errorDia,
+  } = useRankProducto({ date: "dia" });
   const { productos: productosSemana } = useRankProducto({ date: "semana" });
   const { productos: productosMes } = useRankProducto({ date: "mes" });
   const { productos: productosAno } = useRankProducto({ date: "año" });
@@ -47,28 +60,28 @@ export default function RankingProductos({ activeInterval }) {
         "1D",
         productosDia?.reduce(
           (totalSuma, producto) => totalSuma + producto.total,
-          0
+          0,
         ),
       ],
       [
         "1S",
         productosSemana?.reduce(
           (totalSuma, producto) => totalSuma + producto.total,
-          0
+          0,
         ),
       ],
       [
         "1M",
         productosMes?.reduce(
           (totalSuma, producto) => totalSuma + producto.total,
-          0
+          0,
         ),
       ],
       [
         "1A",
         productosAno?.reduce(
           (totalSuma, producto) => totalSuma + producto.total,
-          0
+          0,
         ),
       ],
     ]);
@@ -97,7 +110,12 @@ export default function RankingProductos({ activeInterval }) {
       {productos ? (
         <div className="flex flex-col gap-6  h-4/6  mt-4 overflow-y-auto ">
           {productos.map((data, index) => (
-            <ItemProducto key={index} total={total} index={index} data={data} />
+            <ItemProducto
+              key={data.producto_id}
+              total={total}
+              index={index}
+              data={data}
+            />
           ))}
         </div>
       ) : (

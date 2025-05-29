@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import {
   BarElement,
   CategoryScale,
@@ -82,3 +82,7 @@ export default function VentasCategoria({ activeInterval }) {
     </article>
   );
 }
+
+VentasCategoria.propTypes = {
+  activeInterval: PropTypes.string.isRequired,
+};
