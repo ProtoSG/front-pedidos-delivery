@@ -1,7 +1,14 @@
-/* eslint-disable react/prop-types */
-import { Toaster, toast } from "sonner";
+import PropTypes from "prop-types";
 import useBebidas from "../hooks/useBebidas";
 import { addProduct } from "../services/agregar_producto";
+import { toast, Toaster } from "sonner";
+
+ListBebida.propTypes = {
+  pedido: PropTypes.any.isRequired,
+  setPedido: PropTypes.func.isRequired,
+  total: PropTypes.any.isRequired,
+  setTotal: PropTypes.func.isRequired,
+};
 
 export default function ListBebida({ pedido, setPedido, total, setTotal }) {
   const { bebidas } = useBebidas();

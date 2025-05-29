@@ -1,5 +1,12 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import ListBebida from "./ListBebida";
+
+Bebida.propTypes = {
+  pedido: PropTypes.any.isRequired,
+  setPedido: PropTypes.func.isRequired,
+  total: PropTypes.any.isRequired,
+  setTotal: PropTypes.func.isRequired,
+};
 
 export default function Bebida({ pedido, setPedido, total, setTotal }) {
   return (

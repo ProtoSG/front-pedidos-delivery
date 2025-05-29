@@ -1,7 +1,14 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import useCategorias from "../hooks/useCategorias";
 import ListProducts from "./ListProducts";
+
+Carta.propTypes = {
+  pedido: PropTypes.any.isRequired,
+  setPedido: PropTypes.func.isRequired,
+  total: PropTypes.any.isRequired,
+  setTotal: PropTypes.func.isRequired,
+};
 
 export default function Carta({ pedido, setPedido, total, setTotal }) {
   const [active, setActive] = useState(0);
@@ -30,33 +37,37 @@ export default function Carta({ pedido, setPedido, total, setTotal }) {
       </h1>
 
       <div className="grid grid-cols-4 gap-4  text-center px-12 mt-8 mb-12 text-xl text-primary-800">
-        <>
-          {loadingCategorias ? (
-            <p className="text-center col-span-4">Cargando...</p>
-          ) : errorCategorias ? (
-            <p className="text-center text-base font-bold  col-span-4">
-              Error al obtener Categorias: {errorCategorias}
-            </p>
-          ) : filterCaterias.length === 0 ? (
-            <p className="text-center">No hay categorias</p>
-          ) : (
-            <>
-              {filterCaterias.map((categoria) => (
-                <button
-                  key={categoria.id}
-                  onClick={() => handleClick(categoria.id)}
-                  className={`${
-                    active === categoria.id
-                      ? "border-b-4 border-primary-500"
-                      : "border-[#f1f1f1]"
-                  } text-primary-800 transition border-b-2 `}
-                >
-                  {categoria.nombre.toUpperCase()}
-                </button>
-              ))}
-            </>
-          )}
-        </>
+        {loadingCategorias && (
+          <p className="text-center col-span-4">Cargando...</p>
+        )}
+
+        {!loadingCategorias && errorCategorias && (
+          <p className="text-center text-base font-bold  col-span-4">
+            Error al obtener Categorias: {errorCategorias}
+          </p>
+        )}
+
+        {!loadingCategorias && !errorCategorias && filterCaterias.length === 0 && (
+          <p className="text-center">No hay categorias</p>
+        )}
+
+        {!loadingCategorias && !errorCategorias && filterCaterias.length > 0 && (
+          <div>
+            {filterCaterias.map((categoria) => (
+              <button
+                key={categoria.id}
+                onClick={() => handleClick(categoria.id)}
+                className={`${
+                  active === categoria.id
+                    ? "border-b-4 border-primary-500"
+                    : "border-[#f1f1f1]"
+                } text-primary-800 transition border-b-2 `}
+              >
+                {categoria.nombre.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <ListProducts
