@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
 import { Navigate, Route, Routes } from "react-router-dom";
-import useAdmin from "./hooks/useAdmin";
 import Layout from "./pages/administrador/Layout";
 import { ProtectedRoute } from "./pages/administrador/components/ProtectedRoute";
 import AddProduct from "./pages/administrador/pages/AddProduct";
