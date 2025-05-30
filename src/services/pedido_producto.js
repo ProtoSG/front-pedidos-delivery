@@ -1,25 +1,28 @@
-import { api } from '../constants/api';
+import { api } from "../constants/api";
 
-const pedidoApi = `${api}/pedido_producto`
+const pedidoApi = `${api}/pedido_producto`;
 
-const token = localStorage.getItem('token');
 const getRankProducto = async ({ date }) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${pedidoApi}/rank_productos/${date}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-    })
+    });
     if (!response.ok) {
-      throw new Error("Hubo un problema al enviar la  solicitud " + response.status)
+      throw new Error(
+        "Hubo un problema al enviar la  solicitud " + response.status,
+      );
     }
-    const data = await response.json()
-    return data
+    const data = await response.json();
+    console.log("DATA RANK: ", data);
+    return data;
   } catch (e) {
-    console.error(e)
+    console.error(e);
   }
-}
+};
 
 export { getRankProducto };

@@ -1,10 +1,9 @@
 import { api } from '../constants/api';
 
 const extrasApi = `${api}/extra`;
-const token = localStorage.getItem('token');
-
 
 const postExtra = async ({ nombre, precio, imagen_url }) => {
+  const token = localStorage.getItem("token");
   const data = {
     nombre,
     precio: parseFloat(precio),
@@ -41,6 +40,7 @@ const getExtras = async () => {
 }
 
 const deleteExtra = async (id) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${extrasApi}/${id}`, {
       method: 'DELETE',
@@ -59,6 +59,7 @@ const deleteExtra = async (id) => {
 }
 
 const updateExtra = async (id, nombre, precio, imagen_url) => {
+  const token = localStorage.getItem("token");
   const data = {
     nombre,
     precio: parseFloat(precio),

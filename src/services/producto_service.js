@@ -1,10 +1,9 @@
 import { api } from '../constants/api';
 
 const productoApi = `${api}/producto`
-const token = localStorage.getItem('token');
-
 
 const postProducto = async ({ nombre, precio, categoria_id, descripcion, imagen_url }) => {
+  const token = localStorage.getItem("token");
   const data = {
     nombre,
     precio: parseFloat(precio),
@@ -43,6 +42,7 @@ const getProductos = async () => {
 }
 
 const deleteProducto = async (id) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${productoApi}/${id}`, {
       method: 'DELETE',
@@ -61,6 +61,7 @@ const deleteProducto = async (id) => {
 }
 
 const updateProducto = async (id, nombre, precio, categoria_id, descripcion, imagen_url) => {
+  const token = localStorage.getItem("token");
   const data = {
     nombre,
     precio: parseFloat(precio),

@@ -1,97 +1,111 @@
-import { api } from '../constants/api';
+import { api } from "../constants/api";
 
 const categoriApi = `${api}/categoria`;
 
-const token = localStorage.getItem('token');
-
 const postCategoria = async ({ nombre }) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${categoriApi}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ nombre }),
-    })
+    });
     if (!response.ok) {
-      throw new Error("Hubo un problema al enviar la  solicitud " + response.status)
+      throw new Error(
+        "Hubo un problema al enviar la  solicitud " + response.status,
+      );
     }
 
-    const responseData = await response.json();
+    await response.json();
+  } catch (error) {
+    if (error.status === 401) console.error("No autorizado");
+    console.error(error);
   }
-  catch (error) {
-    if (error.status === 401) console.error("No autorizado")
-    console.error(error)
-  }
-}
+};
 
 const getCategorias = async () => {
-  const response = await fetch(`${categoriApi}`)
+  const response = await fetch(`${categoriApi}`);
   if (!response.ok) {
-    throw new Error("Hubo un problema al enviar la  solicitud " + response.status)
+    throw new Error(
+      "Hubo un problema al enviar la  solicitud " + response.status,
+    );
   }
   const data = await response.json();
   return data;
-}
+};
 
 const deleteCategoria = async (id) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${categoriApi}/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
-    })
+    });
     if (!response.ok) {
-      throw new Error("Hubo un problema al enviar la  solicitud " + response.status)
+      throw new Error(
+        "Hubo un problema al enviar la  solicitud " + response.status,
+      );
     }
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
 const updateCategoria = async (id, nombre) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${categoriApi}/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ nombre }),
-    })
+    });
     if (!response.ok) {
-      throw new Error("Hubo un problema al enviar la  solicitud " + response.status)
+      throw new Error(
+        "Hubo un problema al enviar la  solicitud " + response.status,
+      );
     }
-    const res = await response.json();
+    await response.json();
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
 const getRankCategoria = async ({ date }) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${categoriApi}/rank/${date}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-    })
+    });
     if (!response.ok) {
-      throw new Error("Hubo un problema al enviar la  solicitud " + response.status)
+      throw new Error(
+        "Hubo un problema al enviar la  solicitud " + response.status,
+      );
     }
-    const data = await response.json()
-    return data
-  } catch (e) {
-    console.error(error)
-
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
   }
-}
+};
 
-
-export { deleteCategoria, getCategorias, getRankCategoria, postCategoria, updateCategoria };
-
+export {
+  deleteCategoria,
+  getCategorias,
+  getRankCategoria,
+  postCategoria,
+  updateCategoria,
+};

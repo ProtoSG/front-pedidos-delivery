@@ -2,9 +2,8 @@ import { api } from '../constants/api';
 
 const extraApi = `${api}/pedido_extra`
 
-const token = localStorage.getItem('token');
-
 const getRankExtra = async ({ date }) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${extraApi}/rank_extra/${date}`, {
       method: 'GET',

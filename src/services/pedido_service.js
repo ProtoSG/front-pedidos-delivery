@@ -2,7 +2,6 @@ import { api } from '../constants/api';
 
 const pedidoApi = `${api}/pedido`
 
-const token = localStorage.getItem('token');
 const postPedido = async ({ total, productos, extras }) => {
   try {
     const response = await fetch(`${pedidoApi}`, {
@@ -23,6 +22,7 @@ const postPedido = async ({ total, productos, extras }) => {
 }
 
 const getTotalDias = async () => {
+  const token = localStorage.getItem('token');
   try {
     const response = await fetch(`${pedidoApi}/datos_dias`, {
       method: 'GET',
@@ -42,6 +42,7 @@ const getTotalDias = async () => {
 }
 
 const getTotalSemanas = async () => {
+  const token = localStorage.getItem('token');
   try {
     const response = await fetch(`${pedidoApi}/datos_semanas`, {
       method: 'GET',
@@ -60,8 +61,8 @@ const getTotalSemanas = async () => {
   }
 }
 
-
 const getTotalMeses = async () => {
+  const token = localStorage.getItem('token');
   try {
     const response = await fetch(`${pedidoApi}/datos_meses`, {
       method: 'GET',
@@ -80,8 +81,8 @@ const getTotalMeses = async () => {
   }
 }
 
-
 const getTotalAnos = async () => {
+  const token = localStorage.getItem('token');
   try {
     const response = await fetch(`${pedidoApi}/datos_anos`, {
       method: 'GET',
