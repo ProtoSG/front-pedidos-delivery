@@ -1,8 +1,9 @@
-import { IconShoppingBag, IconUserFilled } from "@tabler/icons-react";
+import { IconShoppingBag, IconUserFilled, IconHeart } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import Logo from "../../../components/icons/Logo";
 import Pedido from "./Pedido";
 import PropTypes from "prop-types";
+import Favoritos from "./Favoritos";
 
 Header.propTypes = {
   pedido: PropTypes.array.isRequired,
@@ -14,6 +15,10 @@ Header.propTypes = {
 export default function Header({ pedido, setPedido, total, setTotal }) {
   const handleOpen = () => {
     const dialog = document.getElementById("modal");
+    dialog.showModal();
+  };
+  const handleOpenFavoritos = () => {
+    const dialog = document.getElementById("modal-favoritos");
     dialog.showModal();
   };
 
@@ -36,6 +41,13 @@ export default function Header({ pedido, setPedido, total, setTotal }) {
         >
           <IconShoppingBag className="size-12 lg:size-14 text-white" />
         </button>
+        <button
+          onClick={handleOpenFavoritos}
+          className="absolute right-24 cursor-pointer hover:scale-110 transition-all border-2 rounded-full p-2 hover:bg-primary-600"
+          type="button"
+        >
+          <IconHeart className="w-6 lg:w-10 h-auto text-white" />
+        </button>
       </header>
       <Pedido
         pedido={pedido}
@@ -43,6 +55,12 @@ export default function Header({ pedido, setPedido, total, setTotal }) {
         total={total}
         setTotal={setTotal}
       />
+      <dialog id="modal-favoritos" className="backdrop:bg-black/30 backdrop:blur-sm rounded-2xl p-0 max-w-3xl w-full">
+        <Favoritos />
+        <form method="dialog" className="flex justify-center mt-4 mb-2">
+          <button className="bg-primary-500 text-white rounded-2xl py-2 px-6">Cerrar</button>
+        </form>
+      </dialog>
     </>
   );
 }

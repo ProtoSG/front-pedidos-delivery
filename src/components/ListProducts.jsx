@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { Toaster, toast } from "sonner";
 import useProductos from "../hooks/useProductos";
 import { addProduct } from "../services/agregar_producto";
+import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
+import useFavoritos from "../hooks/useFavoritos.jsx";
 
 ListProducts.propTypes = {
   active: PropTypes.any.isRequired,
@@ -23,6 +25,7 @@ export default function ListProducts({
   setTotal,
 }) {
   const { productos, loadingProductos, errorProductos } = useProductos();
+  const { favoritos, esFavorito, agregarFavorito, quitarFavorito } = useFavoritos();
 
   if (loadingProductos) {
     return <p className="text-center">Cargando...</p>;
@@ -76,7 +79,24 @@ export default function ListProducts({
             />
           </div>
           <div className="flex flex-col ml-14 h-full justify-evenly col-span-2">
-            <h1 className="font-bold text-xl">{producto.nombre}</h1>
+            <div className="flex justify-between items-center">
+              <h1 className="font-bold text-xl">{producto.nombre}</h1>
+              <button
+                className="ml-2 text-red-500 hover:scale-125 transition"
+                onClick={() =>
+                  esFavorito(producto.id)
+                    ? quitarFavorito(producto.id)
+                    : agregarFavorito(producto.id)
+                }
+                aria-label={esFavorito(producto.id) ? "Quitar de favoritos" : "Agregar a favoritos"}
+              >
+                {esFavorito(producto.id) ? (
+                  <IconHeartFilled className="w-6 h-6" />
+                ) : (
+                  <IconHeart className="w-6 h-6" />
+                )}
+              </button>
+            </div>
             <p>{producto.descripcion.substring(0, 80) + "..."}</p>
             <div className="grid grid-cols-3 items-center">
               <div className="col-span-2 pr-4">

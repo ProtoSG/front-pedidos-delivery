@@ -11,6 +11,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import UpdatePerfil from "./pages/administrador/pages/UpdatePerfil";
 import Perfil from "./pages/administrador/pages/Perfil";
+import FavoritosPage from "./pages/favoritos";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="perfil/update" element={<UpdatePerfil />} />
         </Route>
       </Route>
+      <Route path="/favoritos" element={<FavoritosPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
