@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { toast } from "sonner";
 
 const FAVORITOS_KEY = "favoritos";
 const FavoritosContext = createContext();
@@ -18,11 +19,13 @@ export function FavoritosProvider({ children }) {
   const agregarFavorito = (productoId) => {
     if (!favoritos.includes(productoId)) {
       setFavoritos([...favoritos, productoId]);
+      toast.success("Se agregó a favoritos")
     }
   };
 
   const quitarFavorito = (productoId) => {
     setFavoritos(favoritos.filter((id) => id !== productoId));
+    toast.warning("Se removió de favoritos")
   };
 
   return (
