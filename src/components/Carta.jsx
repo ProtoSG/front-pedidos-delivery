@@ -36,7 +36,7 @@ export default function Carta({ pedido, setPedido, total, setTotal }) {
         Platos a la carta
       </h1>
 
-      <div className="grid grid-cols-4 gap-4  text-center px-12 mt-8 mb-12 text-xl text-primary-800">
+      <div>
         {loadingCategorias && (
           <p className="text-center col-span-4">Cargando...</p>
         )}
@@ -52,7 +52,7 @@ export default function Carta({ pedido, setPedido, total, setTotal }) {
         )}
 
         {!loadingCategorias && !errorCategorias && filterCaterias.length > 0 && (
-          <div>
+          <div className="grid grid-cols-4 gap-4  text-center px-12 mt-8 mb-12 text-xl text-primary-800">
             {filterCaterias.map((categoria) => (
               <button
                 key={categoria.id}
