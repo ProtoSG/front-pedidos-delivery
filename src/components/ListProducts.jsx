@@ -13,6 +13,7 @@ ListProducts.propTypes = {
   setPedido: PropTypes.func.isRequired,
   total: PropTypes.any.isRequired,
   setTotal: PropTypes.func.isRequired,
+  search: PropTypes.string,
 };
 
 export default function ListProducts({
@@ -23,6 +24,7 @@ export default function ListProducts({
   setPedido,
   total,
   setTotal,
+  search = "",
 }) {
   const { productos, loadingProductos, errorProductos } = useProductos();
   const { favoritos, esFavorito, agregarFavorito, quitarFavorito } = useFavoritos();
@@ -43,16 +45,23 @@ export default function ListProducts({
     return <p>No hay productos</p>;
   }
 
-  const filterData =
-    productos.filter((producto) => producto.categoria.id === active) ?? [];
-  const limitData = [];
+  let filterData = productos.filter((producto) => producto.categoria.id === active);
+  if (search.trim() !== "") {
+    const searchLower = search.toLowerCase();
+    filterData = filterData.filter(
+      (producto) =>
+        producto.nombre.toLowerCase().includes(searchLower) ||
+        producto.categoria.nombre.toLowerCase().includes(searchLower)
+    );
+  }
 
+  const limitData = [];
   for (let i = 0; i < filterData.length; i += 3) {
     limitData.push(filterData.slice(i, i + 3));
   }
 
   if (limitData.length === 0) {
-    return <p className="text-center">No hay productos</p>;
+    return <p className="text-center">No se encontró ningún producto.</p>;
   }
 
   const handlePageChange = (pageIndex) => {

@@ -13,6 +13,7 @@ Carta.propTypes = {
 export default function Carta({ pedido, setPedido, total, setTotal }) {
   const [active, setActive] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const [search, setSearch] = useState("");
 
   const { categorias, loadingCategorias, errorCategorias } = useCategorias();
 
@@ -35,6 +36,17 @@ export default function Carta({ pedido, setPedido, total, setTotal }) {
       <h1 className="text-primary-800 font-bold text-center text-2xl">
         Platos a la carta
       </h1>
+
+      {/* Campo de búsqueda */}
+      <div className="flex justify-center my-4">
+        <input
+          type="text"
+          placeholder="Buscar por nombre o categoría..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="border rounded-lg px-4 py-2 w-full max-w-md"
+        />
+      </div>
 
       <div>
         {loadingCategorias && (
@@ -78,6 +90,7 @@ export default function Carta({ pedido, setPedido, total, setTotal }) {
         setPedido={setPedido}
         total={total}
         setTotal={setTotal}
+        search={search}
       />
     </section>
   );
