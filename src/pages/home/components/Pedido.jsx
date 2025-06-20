@@ -42,6 +42,11 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
     toast.error("Pedido eliminado");
   };
 
+  const pedidoRealizado = () => {
+    deletePedido({ setPedido, setTotal });
+    toast.success("Pedido Realizado");
+  }
+
   const openModal = () => {
     const modal2 = document.getElementById("modal-2");
     modal2.showModal();
@@ -69,7 +74,7 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
     )}`;
     window.open(url, "_blank");
 
-    deleteP();
+    pedidoRealizado();
     handleClose();
   };
 
