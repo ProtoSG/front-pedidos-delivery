@@ -70,7 +70,6 @@ export default function Extra({ pedido, setPedido, total, setTotal }) {
           })()}
         </div>
       </div>
-      <Toaster richColors position="bottom-center" />
     </dialog>
   );
 }

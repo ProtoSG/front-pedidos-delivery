@@ -11,10 +11,14 @@ export default function useCategorias() {
       try {
         setLoadingCategorias(true);
         setErrorCategorias(null);
-        const categorias = await getCategorias();
-        setCategorias(categorias);
+        const data = await getCategorias();
+        if (!Array.isArray(data)) {
+          throw new Error("La respuesta de categorias no es un array válido");
+        }
+        setCategorias(data);
       } catch (error) {
-        setErrorCategorias(error.message);
+        setErrorCategorias(error.message || "Error al obtener categorias");
+        setCategorias([]);
       } finally {
         setLoadingCategorias(false);
       }

@@ -12,10 +12,13 @@ export default function useProductos() {
         setLoadingProductos(true);
         setErrorProductos(null);
         const data = await getProductos();
-        console.log("PRODUCTOS: ", data)
+        if (!Array.isArray(data)) {
+          throw new Error("La respuesta de productos no es un array válido");
+        }
         setProductos(data);
       } catch (error) {
-        setErrorProductos(error.message);
+        setErrorProductos(error.message || "Error al obtener productos");
+        setProductos([]);
       } finally {
         setLoadingProductos(false);
       }

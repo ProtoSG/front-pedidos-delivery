@@ -12,9 +12,13 @@ export default function useExtras() {
         setLoadingExtras(true);
         setErrorExtras(null);
         const data = await getExtras();
+        if (!Array.isArray(data)) {
+          throw new Error("La respuesta de extras no es un array válido");
+        }
         setExtras(data);
       } catch (error) {
-        setErrorExtras(error.message);
+        setErrorExtras(error.message || "Error al obtener extras");
+        setExtras([]);
       } finally {
         setLoadingExtras(false);
       }

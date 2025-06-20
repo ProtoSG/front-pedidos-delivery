@@ -1,17 +1,16 @@
-import Carta from "../../../components/Carta";
-import Bebida from "../../../components/Bebida";
-import Pedido from "./Pedido";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
+import Carta from "./Carta";
+import Bebida from "../Bebida";
+import Pedido from "../../pages/home/components/Pedido";
 
 Main.propTypes = {
   pedido: PropTypes.array.isRequired,
   setPedido: PropTypes.func.isRequired,
   total: PropTypes.number.isRequired,
-  setTotal: PropTypes.func.isRequired
-}
+  setTotal: PropTypes.func.isRequired,
+};
 
 export default function Main({ pedido, setPedido, total, setTotal }) {
-
   const openModal = () => {
     const modal = document.getElementById("modal");
     modal.showModal();
@@ -44,12 +43,7 @@ export default function Main({ pedido, setPedido, total, setTotal }) {
           setTotal={setTotal}
         />
       </div>
-      <Pedido
-        pedido={pedido}
-        setPedido={setPedido}
-        total={total}
-        setTotal={setTotal}
-      />
+      <Pedido pedido={pedido} setPedido={setPedido} total={total} setTotal={setTotal} />
     </main>
   );
-}
+} 

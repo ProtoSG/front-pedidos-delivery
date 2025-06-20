@@ -75,54 +75,56 @@ export default function ListProducts({
 
   return (
     <>
-      {limitData[currentPage]?.map((producto) => (
-        <article
-          key={producto.id}
-          className=" h-52 grid grid-cols-3 items-center py-4 justify-center px-4"
-        >
-          <div className="col-span-1 h-full min-h-full ">
-            <img
-              src={producto.imagen_url}
-              alt={producto.nombre}
-              className="rounded-3xl w-full h-full object-cover"
-            />
-          </div>
-          <div className="flex flex-col ml-14 h-full justify-evenly col-span-2">
-            <div className="flex justify-between items-center">
-              <h1 className="font-bold text-xl">{producto.nombre}</h1>
-              <button
-                className="ml-2 text-red-500 hover:scale-125 transition"
-                onClick={() =>
-                  esFavorito(producto.id)
-                    ? quitarFavorito(producto.id)
-                    : agregarFavorito(producto.id)
-                }
-                aria-label={esFavorito(producto.id) ? "Quitar de favoritos" : "Agregar a favoritos"}
-              >
-                {esFavorito(producto.id) ? (
-                  <IconHeartFilled className="w-6 h-6" />
-                ) : (
-                  <IconHeart className="w-6 h-6" />
-                )}
-              </button>
+      <div className="grid grid-cols-1">
+        {limitData[currentPage]?.map((producto) => (
+          <article
+            key={producto.id}
+            className=" h-52 grid grid-cols-3 items-center py-4 justify-center px-4"
+          >
+            <div className="col-span-1 h-full min-h-full ">
+              <img
+                src={producto.imagen_url}
+                alt={producto.nombre}
+                className="rounded-3xl w-full h-full object-cover"
+              />
             </div>
-            <p>{producto.descripcion.substring(0, 80) + "..."}</p>
-            <div className="grid grid-cols-3 items-center">
-              <div className="col-span-2 pr-4">
+            <div className="flex flex-col ml-14 h-full justify-evenly col-span-2">
+              <div className="flex justify-between items-center">
+                <h1 className="font-bold text-xl">{producto.nombre}</h1>
                 <button
-                  onClick={() => handleAgregarProducto(producto)}
-                  className="py-3 w-full bg-primary-500 rounded-2xl text-white hover:bg-primary-600"
+                  className="ml-2 text-red-500 hover:scale-125 transition"
+                  onClick={() =>
+                    esFavorito(producto.id)
+                      ? quitarFavorito(producto.id)
+                      : agregarFavorito(producto.id)
+                  }
+                  aria-label={esFavorito(producto.id) ? "Quitar de favoritos" : "Agregar a favoritos"}
                 >
-                  AGREGAR
+                  {esFavorito(producto.id) ? (
+                    <IconHeartFilled className="w-6 h-6" />
+                  ) : (
+                    <IconHeart className="w-6 h-6" />
+                  )}
                 </button>
               </div>
-              <span className="col-span-1 text-center text-base lg:text-xl font-bold">
-                S/ {producto.precio.toFixed(2)}
-              </span>
+              <p>{producto.descripcion.substring(0, 80) + "..."}</p>
+              <div className="grid grid-cols-3 items-center">
+                <div className="col-span-2 pr-4">
+                  <button
+                    onClick={() => handleAgregarProducto(producto)}
+                    className="py-3 w-full bg-primary-500 rounded-2xl text-white hover:bg-primary-600"
+                  >
+                    AGREGAR
+                  </button>
+                </div>
+                <span className="col-span-1 text-center text-base lg:text-xl font-bold">
+                  S/ {producto.precio.toFixed(2)}
+                </span>
+              </div>
             </div>
-          </div>
-        </article>
-      ))}
+          </article>
+        ))}
+      </div>
       <div className="flex justify-center gap-6 mt-10">
         {limitData.map((page, index) => (
           <button
@@ -134,7 +136,6 @@ export default function ListProducts({
           </button>
         ))}
       </div>
-      <Toaster richColors position="bottom-center" />
     </>
   );
 }

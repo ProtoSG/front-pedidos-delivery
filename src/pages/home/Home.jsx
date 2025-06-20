@@ -1,9 +1,16 @@
-import usePedido from "../../hooks/usePedido";
-import Header from "./components/Header";
-import Main from "./components/Main";
+import { useState } from 'react';
+import Header from './components/Header';
+import Main from './components/Main';
 
 export default function Home() {
-  const { pedido, setPedido, total, setTotal } = usePedido();
+  const [pedido, setPedido] = useState(() => {
+    const savePedido = localStorage.getItem('pedido');
+    return savePedido ? JSON.parse(savePedido) : [[], []];
+  });
+  const [total, setTotal] = useState(() => {
+    const saveTotal = localStorage.getItem('total');
+    return saveTotal ? JSON.parse(saveTotal) : 0;
+  });
 
   return (
     <>

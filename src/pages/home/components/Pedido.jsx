@@ -42,6 +42,10 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
     toast.error("Pedido eliminado");
   };
 
+  const clearCart = () => {
+    deletePedido({ setPedido, setTotal });
+  }
+
   const openModal = () => {
     const modal2 = document.getElementById("modal-2");
     modal2.showModal();
@@ -52,6 +56,7 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
     const extras = pedido[1];
     await postPedido({ total, productos, extras });
     const phoneNumber = "929720211";
+    const aplicationUrl = window.location.origin;
     const message = `*Su pedido es*:${pedido[0]
       .map(
         (producto) => `
@@ -62,14 +67,24 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
         (extra) => `
       - ${extra.cantidad} ${extra.nombre}`,
       )
-      .join("")}\n\n *Total: S/ ${total.toFixed(2)}*
+      .join("")}\n\n *Total: S/ ${total.toFixed(2)}*\n\n*Puede ver el estado de su pedido en:* ${aplicationUrl}
     `;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message,
     )}`;
     window.open(url, "_blank");
 
-    deleteP();
+    // Notificación de HU9 inmediata
+    const productosResumen = pedido[0].map(p => `${p.cantidad}x ${p.nombre}`).join(', ');
+    toast.success(
+        "¡Tu pedido ha sido enviado a WhatsApp!",
+        {
+          description: `Resumen: ${productosResumen}. Revisa tu chat para continuar.`,
+          duration: 10000,
+        }
+    );
+
+    clearCart();
     handleClose();
   };
 
@@ -202,7 +217,6 @@ export default function Pedido({ pedido, setPedido, total, setTotal }) {
             </div>
           </div>
         </div>
-        <Toaster richColors position="bottom-center" />
       </dialog>
 
       <Extra

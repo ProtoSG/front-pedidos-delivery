@@ -101,5 +101,19 @@ const getTotalAnos = async () => {
   }
 }
 
-export { getTotalAnos, getTotalDias, getTotalMeses, getTotalSemanas, postPedido };
+const getPedidosByCliente = async () => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${pedidoApi}/cliente`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    if (!response.ok) {
+        throw new Error("Hubo un problema al obtener los pedidos del cliente " + response.status)
+    }
+    const data = await response.json();
+    return data;
+}
+
+export { getTotalAnos, getTotalDias, getTotalMeses, getTotalSemanas, postPedido, getPedidosByCliente };
 
