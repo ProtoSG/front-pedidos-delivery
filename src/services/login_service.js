@@ -3,10 +3,14 @@ import { api } from "../constants/api";
 const loginApi = `${api}/login`;
 
 const login = async ({ username, password }) => {
+  const csrf = await getCSRFToken();
+
   const response = await fetch(`${loginApi}`, {
     method: "POST",
+    credentials: 'include',
     headers: {
       "Content-Type": "application/json",
+      'X-CSRFToken': csrf   
     },
     body: JSON.stringify({ username, password }),
   });
@@ -39,4 +43,14 @@ const experiedToken = () => {
   return currentTime >= decodedToken.exp;
 };
 
-export { experiedToken, login, logout };
+const getCSRFToken = async() => {
+  const r = await fetch(`${api}/csrf-token`, {
+    credentials: 'include'
+  })
+
+  const { csrf_token } = await r.json()
+  return csrf_token
+}
+
+export { experiedToken, login, logout, getCSRFToken };
+
