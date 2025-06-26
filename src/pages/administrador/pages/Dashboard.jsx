@@ -5,6 +5,9 @@ import useExtras from "../../../hooks/useExtras";
 import useProductos from "../../../hooks/useProductos";
 import ActionButtons from "../components/ActionsButtons";
 import Table from "../components/Table";
+import { useEffect, useState } from "react";
+import { getHistorialPedidos, updateEstadoPedido } from "../../../services/pedido_service";
+import { Toaster, toast } from "sonner";
 
 // Función para crear columnas de DataTable
 const createColumns = (keys) =>
@@ -54,8 +57,43 @@ export default function Dashboard() {
   const newProductos = addActionsButtons(producto_categoria, "productos");
   const newExtras = addActionsButtons(extras, "extras");
 
+  const [pedidos, setPedidos] = useState([]);
+  const [loadingPedidos, setLoadingPedidos] = useState(false);
+  const [errorPedidos, setErrorPedidos] = useState(null);
+
+  useEffect(() => {
+    const fetchPedidos = async () => {
+      setLoadingPedidos(true);
+      setErrorPedidos(null);
+      try {
+        const data = await getHistorialPedidos();
+        setPedidos(data);
+      } catch (e) {
+        setErrorPedidos(e.message);
+      } finally {
+        setLoadingPedidos(false);
+      }
+    };
+    fetchPedidos();
+  }, []);
+
+  const handleEstadoChange = async (pedidoId, nuevoEstado) => {
+    const res = await updateEstadoPedido(pedidoId, nuevoEstado);
+    if (res.error) {
+      toast.error(res.mensaje || "Error al cambiar el estado");
+    } else {
+      toast.success("Estado actualizado");
+      setPedidos((prev) =>
+        prev.map((p) =>
+          p.id === pedidoId ? { ...p, estado: nuevoEstado } : p
+        )
+      );
+    }
+  };
+
   return (
     <main className="flex flex-col w-full h-full px-10">
+      <Toaster richColors position="top-center" />
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold my-8">Dashboard</h1>
         <Link

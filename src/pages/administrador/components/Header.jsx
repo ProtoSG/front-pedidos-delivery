@@ -6,6 +6,7 @@ import {
   IconLayoutDashboard,
   IconLogout2,
   IconUser,
+  IconShoppingBag,
 } from "@tabler/icons-react";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -60,6 +61,7 @@ function ItemHeader({ name, link, icon, onClick }) {
 export default function Header() {
   const navigate = useNavigate();
   const [active, setActive] = useState(false);
+  const role = localStorage.getItem("userRole");
 
   const handleSalir = () => {
     logout();
@@ -109,17 +111,25 @@ export default function Header() {
               onClick={handleActive}
             />
             <ItemHeader
+              name="Pedidos"
+              link="/admin/pedidos"
+              icon={<IconShoppingBag />}
+              onClick={handleActive}
+            />
+            <ItemHeader
               name="Reporte"
               link="/admin/report"
               icon={<IconChartInfographic />}
               onClick={handleActive}
             />
-            <ItemHeader
-              name="Perfil"
-              link="/admin/perfil"
-              icon={<IconUser />}
-              onClick={handleActive}
-            />
+            {role !== "admin" && (
+              <ItemHeader
+                name="Perfil"
+                link="/admin/perfil"
+                icon={<IconUser />}
+                onClick={handleActive}
+              />
+            )}
             <ItemHeader name="Home" link="/" icon={<IconHome />} />
           </ul>
         </nav>

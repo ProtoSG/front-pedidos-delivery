@@ -1,56 +1,85 @@
 import * as jose from "jose";
 import { api } from "../constants/api";
-const loginApi = `${api}/login`;
+const loginApi = `${api}/usuario/login`;
 
 const login = async ({ username, password }) => {
   const csrf = await getCSRFToken();
 
-  const response = await fetch(`${loginApi}`, {
-    method: "POST",
-    credentials: 'include',
-    headers: {
-      "Content-Type": "application/json",
-      'X-CSRFToken': csrf   
-    },
-    body: JSON.stringify({ username, password }),
-  });
-  const { mensaje, token } = await response.json();
+  try {
+    const response = await fetch(`${loginApi}`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrf,
+      },
+      body: JSON.stringify({ email: username, password }),
+    });
 
-  if (!response.ok) {
-    return { mensaje: mensaje };
-  }
-  if (token) {
-    localStorage.setItem("token", token);
-    return { token };
-  } else {
-    return new Error("No se encontro un token en la respuesta del servidor");
+    const data = await response.json();
+    const { mensaje, token, rol } = data;
+
+    console.log("Respuesta login:", data);
+
+    if (!response.ok) {
+      return { mensaje: mensaje || "Error al iniciar sesión" };
+    }
+
+    if (token) {
+      localStorage.setItem("token", token);
+      localStorage.setItem("userRole", "user"); // Siempre guardar como 'user'
+      return { token, rol };
+    } else {
+      return {
+        mensaje: "No se encontró un token en la respuesta del servidor",
+      };
+    }
+  } catch (error) {
+    console.error("Error en login:", error);
+    return { mensaje: "Error de conexión. Inténtelo nuevamente." };
   }
 };
 
 const logout = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("userRole");
 };
 
 const experiedToken = () => {
   const token = localStorage.getItem("token");
-  const decodedToken = jose.decodeJwt(token);
-  const currentTime = Math.floor(Date.now() / 1000);
 
-  if (!decodedToken || typeof decodedToken.exp !== "number") {
-    console.error("El token no es válido o no contiene el campo 'exp'");
+  if (!token) {
+    console.error("No existe token almacenado");
     return true;
   }
-  return currentTime >= decodedToken.exp;
+
+  try {
+    const decodedToken = jose.decodeJwt(token);
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    if (!decodedToken || typeof decodedToken.exp !== "number") {
+      console.error("El token no es válido o no contiene el campo 'exp'");
+      return true;
+    }
+    return currentTime >= decodedToken.exp;
+  } catch (error) {
+    console.error("Error al decodificar token:", error);
+    return true;
+  }
 };
 
-const getCSRFToken = async() => {
-  const r = await fetch(`${api}/csrf-token`, {
-    credentials: 'include'
-  })
+const getCSRFToken = async () => {
+  try {
+    const r = await fetch(`${api}/csrf-token`, {
+      credentials: "include",
+    });
 
-  const { csrf_token } = await r.json()
-  return csrf_token
-}
+    const data = await r.json();
+    return data.csrf_token;
+  } catch (error) {
+    console.error("Error obteniendo CSRF token:", error);
+    return "";
+  }
+};
 
 export { experiedToken, login, logout, getCSRFToken };
-

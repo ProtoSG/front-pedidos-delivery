@@ -39,4 +39,67 @@ const updateAdmin = async (checkPassword, password) => {
   }
 };
 
-export { getAdmin, updateAdmin };
+const loginAdmin = async ({ username, password }) => {
+  try {
+    const response = await fetch(`${adminApi}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    const data = await response.json();
+    const { mensaje, token } = data;
+    if (!response.ok) {
+      return { mensaje: mensaje || "Error al iniciar sesión como admin" };
+    }
+    if (token) {
+      localStorage.setItem("token", token);
+      localStorage.setItem("userRole", "admin");
+      return { token, admin: data.admin, mensaje: mensaje || "Inicio de sesión exitoso" };
+    } else {
+      return {
+        mensaje: "No se encontró un token en la respuesta del servidor",
+      };
+    }
+  } catch (error) {
+    console.error("Error en loginAdmin:", error);
+    return { mensaje: "Error de conexión. Inténtelo nuevamente." };
+  }
+};
+
+const validarTokenAdmin = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return { valid: false, mensaje: "No hay token de admin almacenado" };
+  try {
+    const response = await fetch(`${adminApi}/validar-token`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      if (response.status === 401) {
+        return {
+          valid: false,
+          mensaje: data.mensaje || "Token de admin inválido o expirado",
+        };
+      }
+      return {
+        valid: false,
+        mensaje: "Error al validar token de admin",
+      };
+    }
+    return { valid: true };
+  } catch (error) {
+    console.error("Error en validarTokenAdmin:", error);
+    return {
+      valid: false,
+      mensaje: "Error de conexión al validar sesión de admin",
+    };
+  }
+};
+
+export { getAdmin, updateAdmin, loginAdmin, validarTokenAdmin };
