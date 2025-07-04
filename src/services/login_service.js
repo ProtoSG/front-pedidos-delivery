@@ -2,6 +2,13 @@ import * as jose from "jose";
 import { api } from "../constants/api";
 const loginApi = `${api}/usuario/login`;
 
+/**
+ * Realiza el login del usuario llamando a la API y guarda el token en localStorage.
+ * @param {Object} params - Parámetros de login.
+ * @param {string} params.username - Email del usuario.
+ * @param {string} params.password - Contraseña del usuario.
+ * @returns {Promise<Object>} Objeto con token y rol, o mensaje de error.
+ */
 const login = async ({ username, password }) => {
   const csrf = await getCSRFToken();
 
@@ -25,21 +32,19 @@ const login = async ({ username, password }) => {
       return { mensaje: mensaje || "Error al iniciar sesión" };
     }
 
-    if (token) {
-      localStorage.setItem("token", token);
-      localStorage.setItem("userRole", "user"); // Siempre guardar como 'user'
-      return { token, rol };
-    } else {
-      return {
-        mensaje: "No se encontró un token en la respuesta del servidor",
-      };
-    }
+    // Guardar token y rol en localStorage
+    localStorage.setItem("token", token);
+    localStorage.setItem("userRole", "user"); // Siempre guardar como 'user'
+    return { token, rol };
   } catch (error) {
     console.error("Error en login:", error);
     return { mensaje: "Error de conexión. Inténtelo nuevamente." };
   }
 };
 
+/**
+ * Elimina el token de autenticación del usuario del localStorage.
+ */
 const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("userRole");

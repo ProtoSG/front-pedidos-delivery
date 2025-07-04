@@ -1,10 +1,25 @@
 /* eslint-disable react/prop-types */
 
+/**
+ * Actualiza el localStorage con el pedido y el total.
+ * @param {Array} pedido - Pedido actual.
+ * @param {number} total - Total del pedido.
+ */
 export const actualizarLocalStorage = (pedido, total) => {
     localStorage.setItem('pedido', JSON.stringify(pedido));
     localStorage.setItem('total', JSON.stringify(total));
 }
 
+/**
+ * Agrega un producto o extra al pedido y actualiza el total.
+ * @param {Object} params - Parámetros de la función.
+ * @param {Object} params.extra - Extra a agregar (opcional).
+ * @param {Object} params.producto - Producto a agregar (opcional).
+ * @param {Function} params.setPedido - Setter de pedido.
+ * @param {Function} params.setTotal - Setter de total.
+ * @param {number} params.total - Total actual.
+ * @param {Array} params.pedido - Pedido actual.
+ */
 export const addProduct = ({extra, producto, setPedido, setTotal, total, pedido}) => {
     let newPedido = [...pedido];
     if(extra){
@@ -54,6 +69,10 @@ export const addProduct = ({extra, producto, setPedido, setTotal, total, pedido}
     actualizarLocalStorage(newPedido, total + (extra ? extra.precio : producto.precio));
 }
 
+/**
+ * Resta una unidad de un producto o extra del pedido.
+ * @param {Object} params - Parámetros de la función.
+ */
 export const addCantidad = ({extra, producto, setPedido, setTotal, total, pedido }) => {
     let newPedido = [...pedido];
     if(extra){
@@ -86,6 +105,10 @@ export const addCantidad = ({extra, producto, setPedido, setTotal, total, pedido
 };
 
 
+/**
+ * Resta una unidad de un producto o extra del pedido.
+ * @param {Object} params - Parámetros de la función.
+ */
 export const removeCantidad = ({producto, extra, setPedido, setTotal, total, pedido}) => {
     let newPedido = [...pedido];
     if(producto){
@@ -119,6 +142,10 @@ export const removeCantidad = ({producto, extra, setPedido, setTotal, total, ped
 }
 
 
+/**
+ * Elimina un producto o extra del pedido.
+ * @param {Object} params - Parámetros de la función.
+ */
 export const removeProduct = ({producto, extra, setPedido, setTotal, total, pedido}) => {
     let newPedido = [...pedido];
     if(extra){
@@ -136,6 +163,10 @@ export const removeProduct = ({producto, extra, setPedido, setTotal, total, pedi
     }
 }
 
+/**
+ * Elimina todo el pedido y reinicia el total.
+ * @param {Object} params - Parámetros de la función.
+ */
 export const deletePedido = ({setPedido, setTotal}) => {
     setPedido([[], []]);
     setTotal(0);

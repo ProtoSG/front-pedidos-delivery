@@ -1,4 +1,3 @@
-import Bebida from "../../../components/Bebida";
 import Carta from "../../../components/Carta";
 import Panel from "../../../components/Panel";
 import PropTypes from "prop-types";
@@ -16,19 +15,15 @@ export default function Main({ pedido, setPedido, total, setTotal }) {
       <section className="mt-12">
         <Panel />
       </section>
-      <div className="lg:grid grid-cols-3 mt-12 mx-auto">
-        <Carta
-          pedido={pedido}
-          setPedido={setPedido}
-          total={total}
-          setTotal={setTotal}
-        />
-        <Bebida
-          pedido={pedido}
-          setPedido={setPedido}
-          total={total}
-          setTotal={setTotal}
-        />
+      <div className="flex justify-center mt-12 mx-auto w-full">
+        <div className="w-full max-w-4xl">
+          <Carta
+            pedido={pedido}
+            setPedido={setPedido}
+            total={total}
+            setTotal={setTotal}
+          />
+        </div>
       </div>
     </main>
   );

@@ -2,6 +2,11 @@ import { api } from '../constants/api';
 
 const productoApi = `${api}/producto`
 
+/**
+ * Crea un nuevo producto en la API.
+ * @param {Object} data - Datos del producto a crear.
+ * @returns {Promise<Object>} Respuesta de la API.
+ */
 const postProducto = async ({ nombre, precio, categoria_id, descripcion, imagen_url }) => {
   const token = localStorage.getItem("token");
   const data = {
@@ -32,6 +37,10 @@ const postProducto = async ({ nombre, precio, categoria_id, descripcion, imagen_
   }
 }
 
+/**
+ * Obtiene todos los productos desde la API.
+ * @returns {Promise<Array>} Lista de productos.
+ */
 const getProductos = async () => {
   const response = await fetch(`${productoApi}`)
   if (!response.ok) {
@@ -41,6 +50,11 @@ const getProductos = async () => {
   return data;
 }
 
+/**
+ * Elimina un producto por su ID usando la API.
+ * @param {number} id - ID del producto a eliminar.
+ * @returns {Promise<Object>} Respuesta de la API.
+ */
 const deleteProducto = async (id) => {
   const token = localStorage.getItem("token");
   try {
@@ -60,6 +74,12 @@ const deleteProducto = async (id) => {
   }
 }
 
+/**
+ * Actualiza un producto existente en la API.
+ * @param {number} id - ID del producto a actualizar.
+ * @param {Object} data - Datos actualizados del producto.
+ * @returns {Promise<Object>} Respuesta de la API.
+ */
 const updateProducto = async (id, nombre, precio, categoria_id, descripcion, imagen_url) => {
   const token = localStorage.getItem("token");
   const data = {

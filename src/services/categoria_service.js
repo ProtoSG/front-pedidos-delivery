@@ -37,6 +37,11 @@ const getCategorias = async () => {
   return data;
 };
 
+/**
+ * Elimina una categoría por su ID usando la API.
+ * @param {number} id - ID de la categoría a eliminar.
+ * @returns {Promise<Object>} Respuesta de la API.
+ */
 const deleteCategoria = async (id) => {
   const token = localStorage.getItem("token");
   try {

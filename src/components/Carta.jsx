@@ -32,7 +32,7 @@ export default function Carta({ pedido, setPedido, total, setTotal }) {
     categorias?.filter((categoria) => categoria.nombre !== "bebida") ?? [];
 
   return (
-    <section className="mx-auto lg:w-full col-span-2 lg:border-r-2 border-primary-950">
+    <section className="mx-auto w-full max-w-3xl">
       <h1 className="text-primary-800 font-bold text-center text-2xl">
         Platos a la carta
       </h1>
